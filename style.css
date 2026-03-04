@@ -11,8 +11,12 @@ color:white;
 overflow-x:hidden;
 }
 
+/* NAVBAR */
+
 .navbar{
 position:fixed;
+top:0;
+left:0;
 width:100%;
 padding:18px 40px;
 background:rgba(10,25,20,0.45);
@@ -54,6 +58,8 @@ border-radius:6px;
 cursor:pointer;
 }
 
+/* HERO */
+
 .hero{
 height:100vh;
 display:flex;
@@ -62,16 +68,21 @@ justify-content:center;
 text-align:center;
 position:relative;
 overflow:hidden;
+padding-top:80px;
 }
 
 .hero-content{
-max-width:650px;
+max-width:700px;
 z-index:2;
 }
 
 .hero h1{
 font-size:48px;
 margin-bottom:20px;
+}
+
+.hero p{
+opacity:0.8;
 }
 
 .hero-buttons{
@@ -95,8 +106,12 @@ border-radius:6px;
 cursor:pointer;
 }
 
+/* GRID BACKGROUND */
+
 .grid{
 position:absolute;
+top:0;
+left:0;
 width:100%;
 height:100%;
 background-image:
@@ -104,6 +119,7 @@ linear-gradient(rgba(0,255,150,0.05) 1px, transparent 1px),
 linear-gradient(90deg,rgba(0,255,150,0.05) 1px, transparent 1px);
 background-size:40px 40px;
 animation:gridMove 20s linear infinite;
+z-index:0;
 }
 
 @keyframes gridMove{
@@ -111,15 +127,29 @@ animation:gridMove 20s linear infinite;
 100%{transform:translateY(40px)}
 }
 
+/* CIRCUIT CANVAS */
+
+#circuit{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:1;
+}
+
+/* SHIELD */
+
 .shield{
 position:absolute;
 bottom:100px;
 width:80px;
 height:80px;
 background:linear-gradient(#00ff9c,#008f6a);
-clip-path:polygon(50% 0%, 90% 20%, 90% 60%, 50% 100%, 10% 60%, 10% 20%);
+clip-path:polygon(50% 0%,90% 20%,90% 60%,50% 100%,10% 60%,10% 20%);
 box-shadow:0 0 30px rgba(0,255,150,0.6);
 animation:floatShield 4s ease-in-out infinite;
+z-index:2;
 }
 
 @keyframes floatShield{
@@ -128,18 +158,23 @@ animation:floatShield 4s ease-in-out infinite;
 100%{transform:translateY(0)}
 }
 
+/* STATS */
+
 .stats{
 display:flex;
 justify-content:center;
 gap:60px;
 padding:120px 20px;
 text-align:center;
+flex-wrap:wrap;
 }
 
 .stat h2{
 font-size:40px;
 color:#00ff9c;
 }
+
+/* SOLUTIONS */
 
 .solutions{
 padding:120px 20px;
@@ -167,6 +202,8 @@ transform:translateY(-10px);
 box-shadow:0 0 20px rgba(0,255,150,0.4);
 }
 
+/* PRODUCTS */
+
 #products{
 padding:120px 20px;
 text-align:center;
@@ -175,6 +212,8 @@ text-align:center;
 .carousel{
 overflow:hidden;
 width:100%;
+max-width:1200px;
+margin:auto;
 padding:60px 0;
 }
 
@@ -192,12 +231,15 @@ border-radius:10px;
 display:flex;
 align-items:center;
 justify-content:center;
+font-weight:600;
 }
 
 @keyframes scrollProducts{
 0%{transform:translateX(0)}
 100%{transform:translateX(-50%)}
 }
+
+/* CONTACT */
 
 .contact{
 padding:120px 20px;
