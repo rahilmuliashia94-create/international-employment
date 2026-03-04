@@ -31,7 +31,7 @@ const increment=target/100
 
 if(c<target){
 
-counter.innerText=Math.ceil(c+increment)
+counter.innerText=`${Math.ceil(c+increment)}`
 
 setTimeout(update,20)
 
@@ -53,21 +53,16 @@ update()
 const canvas=document.getElementById("circuit")
 const ctx=canvas.getContext("2d")
 
-function resize(){
 canvas.width=window.innerWidth
 canvas.height=window.innerHeight
-}
-
-resize()
-window.addEventListener("resize",resize)
 
 let lines=[]
 
-for(let i=0;i<35;i++){
+for(let i=0;i<30;i++){
 lines.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-length:60+Math.random()*100
+length:60
 })
 }
 
@@ -75,8 +70,7 @@ function draw(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height)
 
-ctx.strokeStyle="rgba(0,255,150,0.35)"
-ctx.lineWidth=1
+ctx.strokeStyle="rgba(0,255,150,0.4)"
 
 lines.forEach(l=>{
 ctx.beginPath()
