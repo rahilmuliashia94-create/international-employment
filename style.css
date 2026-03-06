@@ -373,3 +373,173 @@ transform-style:preserve-3d;
 will-change:transform;
 transition:transform 0.25s ease, box-shadow 0.25s ease;
 }
+
+/* ------------------------
+   PRODUCT CARDS + SLIDER + POPUP
+   Scoped to #products so it doesn't break other .track or .card usage
+   ------------------------ */
+
+/* Product card visual (keeps the same look as .card but more compact) */
+#products .product-card{
+min-width:260px;
+background:white;
+border-radius:14px;
+padding:18px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+text-align:center;
+cursor:pointer;
+transition:transform 0.35s ease, box-shadow 0.35s ease;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/* product image */
+#products .product-card img{
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:10px;
+margin-bottom:12px;
+display:block;
+}
+
+/* product title and description */
+#products .product-card h3{
+font-size:16px;
+margin:6px 0 8px 0;
+color:#0b2540;
+}
+#products .product-card p{
+font-size:14px;
+color:#444;
+margin:0;
+opacity:0.9;
+}
+
+/* hover */
+#products .product-card:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 15px 35px rgba(0,119,255,0.18);
+}
+
+/* override the general .track animation specifically for the products area:
+   make the product track move to the RIGHT in an infinite loop.
+   We duplicate the track items to appear continuous (HTML approach recommended),
+   but this scoped CSS makes the movement rightwards. */
+#products .track{
+display:flex;
+gap:30px;
+/* horizontal scrolling to the right: start translated left and animate toward 0 */
+animation:scrollRight 36s linear infinite;
+}
+
+/* animation moves FROM left -> to 0, which visually makes content appear moving right */
+@keyframes scrollRight{
+0%{ transform: translateX(-50%); }
+100%{ transform: translateX(0); }
+}
+
+/* ensure existing .slide style still looks fine inside products */
+#products .slide{
+min-width:260px;
+height:200px;
+background:#fafafa;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:12px;
+box-shadow:0 8px 20px rgba(0,0,0,0.04);
+}
+
+/* small responsive adjustments for product slider */
+@media (max-width:900px){
+  #products .product-card{ min-width:220px; }
+  #products .product-card img{ height:140px; }
+  #products .track{ gap:18px; animation-duration:28s; }
+}
+
+/* PRODUCT POPUP (full-screen centered preview) */
+.product-popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:flex;
+align-items:center;
+justify-content:center;
+opacity:0;
+pointer-events:none;
+transition:opacity 0.25s ease;
+z-index:2000;
+}
+
+.product-popup.active{
+opacity:1;
+pointer-events:auto;
+}
+
+.popup-content{
+background:white;
+padding:28px;
+border-radius:14px;
+max-width:720px;
+width:92%;
+text-align:center;
+box-shadow:0 30px 80px rgba(0,0,0,0.35);
+transform:translateY(0);
+}
+
+.popup-content img{
+width:100%;
+height:auto;
+border-radius:10px;
+margin-bottom:18px;
+object-fit:cover;
+}
+
+/* popup text */
+.popup-content h3{
+margin:6px 0 8px 0;
+font-size:20px;
+color:#0b2540;
+}
+.popup-content p{
+color:#444;
+line-height:1.6;
+}
+
+/* close hint (small X) */
+.popup-close{
+position:absolute;
+top:18px;
+right:18px;
+width:38px;
+height:38px;
+border-radius:50%;
+background:rgba(255,255,255,0.95);
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+box-shadow:0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* small screens adjustments */
+@media (max-width:600px){
+.popup-content{ padding:18px; }
+}
+
+/* keep existing card 3D tilt behavior (no change) */
+.cards{
+perspective:1200px;
+}
+
+.card{
+transform-style:preserve-3d;
+will-change:transform;
+transition:transform 0.25s ease, box-shadow 0.25s ease;
+}
