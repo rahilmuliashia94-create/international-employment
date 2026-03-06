@@ -1,142 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us | ISRATECH </title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>About Everest Security — Everest Security Pvt. Ltd.</title>
 
-<link rel="stylesheet" href="script.css">
-
-<style>
-
-body{
-background:#0b0f1a;
-color:white;
-font-family:Arial, Helvetica, sans-serif;
-margin:0;
-}
-
-.about-hero{
-height:60vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-background:linear-gradient(120deg,#0b0f1a,#111a2e);
-}
-
-.about-hero h1{
-font-size:60px;
-}
-
-.section{
-max-width:1200px;
-margin:auto;
-padding:120px 20px;
-}
-
-.section p{
-font-size:18px;
-line-height:1.8;
-opacity:.85;
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:30px;
-margin-top:80px;
-}
-
-.stat-card{
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(10px);
-border-radius:20px;
-padding:40px;
-text-align:center;
-transition:.4s;
-}
-
-.stat-card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 40px rgba(0,150,255,.3);
-}
-
-.stat-number{
-font-size:40px;
-color:#3aa8ff;
-font-weight:bold;
-}
-
-footer{
-text-align:center;
-padding:60px;
-opacity:.6;
-}
-
-</style>
-
+<!-- use the same site styles and scripts -->
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="why-us.html">Why Choose Us</a>
-</nav>
+<header class="navbar">
+  <div class="nav-container">
+    <div class="logo">EVEREST SECURITY</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="why-us.html">Why Choose Us</a>
+      <a href="#solutions" onclick="location.href='index.html#solutions'">Solutions</a>
+      <a href="#products" onclick="location.href='index.html#products'">Products</a>
+      <a href="#contact" onclick="location.href='index.html#contact'">Contact</a>
+    </nav>
+    <button class="cta" onclick="location.href='index.html#contact'">Get Quote</button>
+  </div>
+</header>
 
-<section class="about-hero">
-<h1>About Everest Security</h1>
+<!-- HERO — uses the same hero styling as index -->
+<section class="hero" style="padding-top:130px;">
+  <div class="grid"></div>
+  <div class="hero-content">
+    <h1>About Everest Security</h1>
+    <p>
+      Everest Security Pvt. Ltd. is a leading Indian security technology and solutions company delivering Israeli high-tech online monitoring,
+      alarm and protection systems since 2003. We combine advanced technology, a 24/7 monitoring control center and highly trained engineers
+      to protect banks, institutions, businesses and homes across India.
+    </p>
+    <div class="hero-buttons">
+      <button class="primary" onclick="location.href='index.html#contact'">Contact Our Team</button>
+      <a class="secondary" href="#company-story" style="text-decoration:none;display:inline-block;padding:12px 28px;border-radius:6px;border:1px solid #ccc;background:white;color:#333;margin-left:12px;">Read More</a>
+    </div>
+  </div>
+  <div class="shield"></div>
 </section>
 
-<section class="section">
+<!-- COMPANY STORY -->
+<section id="company-story" class="solutions" style="padding-top:80px;">
+  <h2>Company Profile & History</h2>
 
-<p>
-Everest Security Pvt. Ltd. is an Indian company providing Israeli Hi-Tech
-online monitoring protection and advanced security systems since 2003.
-</p>
+  <div style="max-width:1000px;margin:30px auto 0 auto;text-align:left;color:#222;line-height:1.8;padding:0 20px;">
+    <p><strong>Established in 2003,</strong> Everest Security Pvt. Ltd. has been delivering turnkey online monitoring and protection solutions across India. Our mission is to provide reliable, professional and technically advanced security systems built on proven Israeli technology and best practices from global vendors.</p>
 
-<p>
-We deliver integrated security solutions to banks, financial institutions,
-government organizations, factories, offices, showrooms, residential
-properties and many other sectors requiring reliable protection.
-</p>
+    <p>Over the past two decades we have installed and managed systems for a wide spectrum of clients — from large financial organizations and government entities to retail showrooms, factories and private residences. We focus on high availability monitoring: 24 hours a day, 7 days a week, 365 days a year.</p>
 
-<p>
-Our mission is to provide advanced monitoring technology combined with
-24/7 operational response systems that ensure continuous protection
-for our clients.
-</p>
+    <p>Our services cover full lifecycle security: consultancy, system design, supply of equipment, professional installation, training, and continuous monitoring and maintenance. We emphasize fast emergency response, precise detection algorithms and reliable communications back to our control center.</p>
 
-<div class="stats">
+    <p>Technology partners and product lines include advanced alarm panels, GPRS/4G vehicle trackers, NVRs, AI-enabled video analytics, smoke and fire detection systems and panic button integrations for mission-critical locations like banks and ATMs.</p>
+  </div>
+</section>
 
-<div class="stat-card">
-<div class="stat-number">20+</div>
-Years Experience
-</div>
+<!-- STATS (re-usable layout; counters run from script.js) -->
+<section class="stats" style="padding-top:60px;">
+  <div class="stat">
+    <h2 data-target="20">0</h2>
+    <p>Years Experience</p>
+  </div>
 
-<div class="stat-card">
-<div class="stat-number">5000+</div>
-Clients Protected
-</div>
+  <div class="stat">
+    <h2 data-target="5000">0</h2>
+    <p>Installations</p>
+  </div>
 
-<div class="stat-card">
-<div class="stat-number">24/7</div>
-Monitoring
-</div>
-
-<div class="stat-card">
-<div class="stat-number">100+</div>
-Security Experts
-</div>
-
-</div>
+  <div class="stat">
+    <h2 data-target="1000">0</h2>
+    <p>Clients Protected</p>
+  </div>
 
 </section>
 
-<footer>
-Everest Security Pvt. Ltd.
+<!-- CAPABILITIES / FEATURES GRID (many cards as requested) -->
+<section class="solutions" id="capabilities" style="padding-top:40px;padding-bottom:40px;">
+  <h2 style="margin-bottom:6px;">Our Capabilities & Services</h2>
+  <p style="max-width:900px;margin:8px auto 24px;color:#444;">We provide a full range of security services and systems — below are core capabilities and solutions Everest delivers.</p>
+
+  <div class="cards" style="max-width:1100px;">
+    <!-- many cards — each will use your existing .card styles -->
+    <div class="card">
+      <div class="icon">🛡️</div>
+      <h3>24/7 Online Alarm Monitoring</h3>
+      <p>Continuous alarm supervision with immediate escalation to our operations team and local response units when required.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏦</div>
+      <h3>ATM & Bank Protection</h3>
+      <p>Specialized alarm logic, tamper detection and secure communications designed specifically for banking environments and kiosks.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🚚</div>
+      <h3>GPRS / Fleet & Logistics Tracking</h3>
+      <p>Real-time vehicle tracking, route monitoring, fuel usage reporting and loss prevention for logistics operators.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏭</div>
+      <h3>Warehouse & Industrial Security</h3>
+      <p>Perimeter monitoring, asset protection, staff-safety systems and integrated alarm & CCTV solutions for warehouses and plants.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📹</div>
+      <h3>CCTV & Video Analytics</h3>
+      <p>High-definition surveillance, AI motion analytics, intelligent recording and cloud/edge-based storage options.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔥</div>
+      <h3>Fire & Smoke Detection</h3>
+      <p>Automatic fire detection with integrated alerting, zone management and emergency protocols for critical facilities.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔐</div>
+      <h3>Access Control & Biometrics</h3>
+      <p>Secure entry systems, biometric access, and programmable rules for staff and visitor management.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📞</div>
+      <h3>Panic Button & Rapid Alert Systems</h3>
+      <p>Dedicated emergency triggers and silent alarm flows for showrooms, banks, hospitals and sensitive locations.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>Security Dashboards & Reporting</h3>
+      <p>Executive dashboards, audit trails and service reports to help managers stay informed and compliant.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🧰</div>
+      <h3>Installation & Maintenance</h3>
+      <p>Professional installation, preventive maintenance plans and rapid field service from trained engineers.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎓</div>
+      <h3>Training & Operations Support</h3>
+      <p>Operator and guard training, procedures, and continuous support for correct alarm handling and escalation.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌐</div>
+      <h3>Custom Integrations</h3>
+      <p>Integration with banking systems, building management, logistics platforms and cloud services for tailored solutions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES (more descriptive) -->
+<section class="industries" style="padding-top:30px;padding-bottom:30px;">
+  <h2 style="margin-bottom:8px;">Industries We Serve</h2>
+  <p style="max-width:900px;margin:0 auto 18px auto;color:#444;">Everest Security designs and deploys solutions for a wide range of sectors:</p>
+
+  <div class="cards" style="max-width:1000px;">
+    <div class="card"><h3>Banks & Finance</h3><p>ATM monitoring, vault protection and branch security.</p></div>
+    <div class="card"><h3>Government & Public Sector</h3><p>Secure monitoring for public assets and facilities.</p></div>
+    <div class="card"><h3>Logistics & Transport</h3><p>Fleet tracking and cargo protection.</p></div>
+    <div class="card"><h3>Retail & Showrooms</h3><p>Theft prevention, perimeter control and staff safety.</p></div>
+    <div class="card"><h3>Factories & Warehouses</h3><p>Perimeter detection, access control and asset tracking.</p></div>
+    <div class="card"><h3>Residential & Commercial</h3><p>Tailored alarm monitoring for houses and offices.</p></div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS / TECHNOLOGY -->
+<section class="solutions" style="padding-top:20px;padding-bottom:20px;">
+  <h2>Technology & Certifications</h2>
+  <p style="max-width:900px;margin:8px auto 20px;color:#444;">We use vetted technologies from Israel, Europe and other partners to ensure reliable detection and secure communications. Our teams follow strict operational procedures and ISO-like best practices for monitoring and response.</p>
+
+  <div class="cards" style="max-width:1000px;">
+    <div class="card"><h3>Israeli Hi-Tech Systems</h3><p>Advanced alarm & analytics platforms.</p></div>
+    <div class="card"><h3>GPRS / GSM / IP Communications</h3><p>Multi-path reporting for resilience.</p></div>
+    <div class="card"><h3>AI Motion Detection</h3><p>Reduce false alarms with smart analytics.</p></div>
+    <div class="card"><h3>Secure Cloud & On-Prem Options</h3><p>Flexible architectures to meet compliance needs.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS (short examples) -->
+<section class="solutions" style="padding-top:20px;padding-bottom:20px;">
+  <h2>Customer Feedback</h2>
+  <div style="max-width:900px;margin:10px auto 0 auto;color:#444;">
+    <p><em>“Everest Security provided a reliable monitoring service for our branch network. Their response times and professional installation were excellent.”</em> — Finance Organization</p>
+    <p><em>“The fleet tracking solution saved us time and money. Real-time alerts helped us stop several incidents.”</em> — Logistics Company</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="solutions" style="padding-top:10px;padding-bottom:10px;">
+  <h2>Frequently Asked Questions</h2>
+
+  <div style="max-width:1000px;margin:10px auto 40px auto;text-align:left;color:#444;line-height:1.7;">
+    <h4>Q: What services does Everest Security provide?</h4>
+    <p>A: We provide online alarm monitoring, CCTV analytics, vehicle tracking, access control, fire detection and full installation & maintenance services.</p>
+
+    <h4>Q: Do you provide 24/7 monitoring?</h4>
+    <p>A: Yes — our monitoring control center operates 24/7/365 and dispatches response units when needed.</p>
+
+    <h4>Q: Which industries do you serve?</h4>
+    <p>A: We serve banks, government organizations, logistics, retail, factories, warehouses and residential clients.</p>
+
+    <h4>Q: How can I request a quote?</h4>
+    <p>A: Use the form on the Contact section below or email <a href="mailto:info@everestsecurityonline.com">info@everestsecurityonline.com</a> — we’ll reply quickly.</p>
+  </div>
+</section>
+
+<!-- DOWNLOAD BROCHURE + CTA -->
+<section class="why-preview" style="padding-top:10px;padding-bottom:40px;text-align:center;">
+  <a href="#" class="primary" style="margin-right:14px;">Download Company Brochure (PDF)</a>
+  <a href="index.html#contact" class="secondary" style="text-decoration:none;padding:12px 26px;border-radius:6px;border:1px solid #ccc;background:white;color:#333;">Request a Consultation</a>
+</section>
+
+<!-- CONTACT SUMMARY & FOOTER -->
+<section id="contact" class="contact" style="padding-top:0;">
+  <h2>Contact Everest Security</h2>
+
+  <div style="max-width:900px;margin:0 auto 20px auto;text-align:left;color:#222;line-height:1.7;padding:0 20px;">
+    <p><strong>Head Office</strong><br>
+    Everest House, R.K. Park,<br>
+    Between Mavdi Circle & Gondal Circle,<br>
+    150 Feet Ring Road, Rajkot – 360004, Gujarat, India</p>
+
+    <p><strong>Phone</strong><br>
+    +91 9624696247<br>
+    +91 9624796248</p>
+
+    <p><strong>Email</strong><br>
+    <a href="mailto:info@everestsecurityonline.com">info@everestsecurityonline.com</a></p>
+
+    <p><strong>For enquiries:</strong> Fill the form on the homepage or email us directly — our team will respond promptly.</p>
+  </div>
+
+</section>
+
+<footer class="footer" style="padding:40px 20px;text-align:center;background:transparent;">
+  <div style="max-width:1000px;margin:auto;color:#666;">
+    <div style="margin-bottom:12px;"><img src="EverestSecurity.jpg" alt="Everest Security" style="height:56px;"></div>
+    <p>Copyright © 2026 Everest Security Pvt. Ltd. All rights reserved.</p>
+  </div>
 </footer>
 
 </body>
