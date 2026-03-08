@@ -778,7 +778,6 @@ grid-template-columns:1fr;
 direction:ltr;
 }
 
-}
 /* ========================= */
 /* MEGA NAVBAR */
 /* ========================= */
@@ -795,6 +794,7 @@ direction:ltr;
   color:#111;
   font-weight:500;
   position:relative;
+  font-size:15px;
 }
 
 /* dropdown wrapper */
@@ -803,33 +803,38 @@ direction:ltr;
   position:relative;
 }
 
-/* mega menu */
+/* mega menu panel */
 
 .mega-menu{
   position:absolute;
-  left:0;
+  left:50%;
   top:100%;
-  width:100vw;
-  background:white;
-  box-shadow:0 20px 50px rgba(0,0,0,0.1);
-  padding:40px 80px;
+  width:1200px;
+  transform:translateX(-50%) translateY(10px);
+
+  background:#ffffff;
+  box-shadow:0 25px 60px rgba(0,0,0,0.12);
+  border-top:1px solid #eee;
+
+  padding:45px 60px;
 
   display:flex;
   gap:60px;
+  justify-content:flex-start;
 
   opacity:0;
   visibility:hidden;
-  transform:translateY(10px);
+
   transition:all .25s ease;
   z-index:999;
 }
 
-/* show menu */
+/* show dropdown */
 
 .dropdown:hover .mega-menu{
   opacity:1;
   visibility:visible;
-  transform:translateY(0);
+  transform:translateX(-50%) translateY(0);
 }
 
 /* columns */
@@ -839,12 +844,21 @@ direction:ltr;
   flex-direction:column;
   min-width:220px;
   gap:10px;
+  padding-right:20px;
+  border-right:1px solid #eee;
 }
 
+.mega-column:last-child{
+  border-right:none;
+}
+
+/* section titles */
+
 .mega-column strong{
-  font-size:14px;
-  margin-bottom:10px;
-  color:#555;
+  font-size:13px;
+  margin-bottom:12px;
+  color:#888;
+  letter-spacing:.5px;
   text-transform:uppercase;
 }
 
@@ -854,23 +868,22 @@ direction:ltr;
   color:#333;
   font-size:14px;
   text-decoration:none;
-  transition:all .2s;
+  padding:3px 0;
+  transition:all .2s ease;
 }
+
+/* hover effect */
 
 .mega-column a:hover{
-  color:#0077ff;
-  transform:translateX(3px);
+  color:#0066ff;
+  transform:translateX(4px);
 }
 
-/* make dropdown text show pointer */
+/* dropdown arrow */
 
 .dropdown > a::after{
   content:" ▼";
   font-size:10px;
-}
-/* fix right-side dropdown (Support) */
-
-nav .dropdown:last-child .mega-menu{
-  right:0;
-  left:auto;
+  margin-left:4px;
+  color:#666;
 }
