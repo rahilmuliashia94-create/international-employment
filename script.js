@@ -367,7 +367,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // we can measure scroll width and adjust duration. For now we leave CSS durations.
   })();
 
-
 }); // DOMContentLoaded
 // ===== why-us page interactivity (append to script.js) =====
 (function(){
