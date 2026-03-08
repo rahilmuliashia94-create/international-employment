@@ -369,3 +369,169 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 }); // DOMContentLoaded
+// ===== why-us page interactivity (append to script.js) =====
+(function(){
+  if (window.__everestWhyUsPageInit) return;
+  window.__everestWhyUsPageInit = true;
+
+  /* 1) Counters (works for .why-stats, .stats, expanded-stats) */
+  (function runCounters(){
+    const roots = document.querySelectorAll('.why-stats, .expanded-stats, .stats');
+    roots.forEach(root => {
+      const items = root.querySelectorAll('h2[data-target]');
+      if (!items.length) return;
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          items.forEach(el => {
+            if (el.dataset._done) return;
+            const target = Math.max(0, +el.dataset.target || 0);
+            const speed = 220;
+            const step = Math.max(1, Math.floor(target / speed));
+            let n = 0;
+            const tick = () => {
+              n += step;
+              if (n >= target) {
+                el.textContent = target;
+                el.dataset._done = '1';
+              } else {
+                el.textContent = n;
+                requestAnimationFrame(tick);
+              }
+            };
+            tick();
+          });
+          obs.disconnect();
+        });
+      }, {threshold: 0.35});
+      obs.observe(root);
+    });
+  })();
+
+  /* 2) Gallery: open #popup with image and caption */
+  (function gallery(){
+    function openPopup(src, title, text) {
+      const popup = document.getElementById('popup');
+      if (!popup) return;
+      const img = popup.querySelector('#popup-img');
+      const h = popup.querySelector('#popup-title');
+      const p = popup.querySelector('#popup-text');
+      img.src = src || '';
+      img.alt = title || '';
+      h.textContent = title || '';
+      p.textContent = text || '';
+      popup.style.display = 'block';
+      popup.setAttribute('aria-hidden', 'false');
+    }
+    function closePopup() {
+      const popup = document.getElementById('popup');
+      if (!popup) return;
+      popup.style.display = 'none';
+      popup.setAttribute('aria-hidden', 'true');
+    }
+
+    document.addEventListener('click', function(e){
+      const g = e.target.closest('.gallery-item');
+      if (g) {
+        const src = g.dataset.img || g.querySelector('img')?.src || '';
+        const caption = g.querySelector('.caption')?.textContent || '';
+        openPopup(src, caption, caption);
+      }
+      if (e.target.closest('#popup .popup-close') || e.target.id === 'popup-close') {
+        closePopup();
+      }
+    });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        const popup = document.getElementById('popup');
+        if (popup && popup.style.display === 'block') closePopup();
+      }
+      if (e.key === 'Enter') {
+        const focused = document.activeElement;
+        if (focused && focused.classList && focused.classList.contains('gallery-item')) {
+          const src = focused.dataset.img || focused.querySelector('img')?.src || '';
+          const caption = focused.querySelector('.caption')?.textContent || '';
+          openPopup(src, caption, caption);
+        }
+      }
+    });
+
+    // close when user clicks outside content
+    const popupRoot = document.getElementById('popup');
+    if (popupRoot) {
+      popupRoot.addEventListener('click', function(ev){
+        if (ev.target === popupRoot) closePopup();
+      });
+    }
+
+    // make gallery items keyboard friendly
+    document.querySelectorAll('.gallery-item').forEach(g => {
+      if (!g.hasAttribute('tabindex')) g.setAttribute('tabindex', '0');
+      g.setAttribute('role', 'button');
+    });
+  })();
+
+  /* 3) FAQ accordion */
+  (function faq(){
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      const panel = btn.nextElementSibling;
+      if (panel) panel.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        if (panel) panel.style.display = isOpen ? 'none' : 'block';
+      });
+    });
+  })();
+
+  /* 4) Hover/tap reveal logic for feature cards (if you used reveal blocks)
+     If .reveal exists inside .card, we toggle aria-hidden on hover/focus/click.
+  */
+  (function reveals(){
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      const reveal = card.querySelector('.reveal, .card-reveal');
+      if (!reveal) return;
+      reveal.setAttribute('aria-hidden', 'true');
+
+      card.addEventListener('mouseenter', () => {
+        reveal.setAttribute('aria-hidden', 'false');
+      });
+      card.addEventListener('mouseleave', () => {
+        reveal.setAttribute('aria-hidden', 'true');
+      });
+
+      card.addEventListener('focusin', () => reveal.setAttribute('aria-hidden', 'false'));
+      card.addEventListener('focusout', () => reveal.setAttribute('aria-hidden', 'true'));
+
+      // mobile/tap toggle (ignore clicks on links/buttons inside)
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a') || e.target.closest('button')) return;
+        const open = reveal.getAttribute('aria-hidden') === 'false';
+        reveal.setAttribute('aria-hidden', open ? 'true' : 'false');
+      });
+    });
+  })();
+
+  /* 5) Demo buttons: reuse popup for demo text */
+  (function demoBtns(){
+    document.addEventListener('click', function(e){
+      const btn = e.target.closest('.demo-btn');
+      if (!btn) return;
+      const popup = document.getElementById('popup');
+      if (!popup) return;
+      const img = popup.querySelector('#popup-img');
+      const h = popup.querySelector('#popup-title');
+      const p = popup.querySelector('#popup-text');
+      img.src = 'EVEREST-PLATINUM.jpg';
+      img.alt = 'Everest Monitoring Demo';
+      h.textContent = 'Everest Monitoring — Demo';
+      p.textContent = 'Demo: Operator verifies events using short camera clips and sensor correlation, then escalates to responders when required.';
+      popup.style.display = 'block';
+      popup.setAttribute('aria-hidden', 'false');
+    });
+  })();
+
+})();
