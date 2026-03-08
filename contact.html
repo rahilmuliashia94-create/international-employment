@@ -1,0 +1,57 @@
+<!-- Paste this into your contact.html -->
+<div class="container" style="max-width:760px;margin:32px auto;padding:24px;font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;">
+  <h1 style="margin:0 0 18px;color:#111;font-size:22px;">Contact iStratech</h1>
+
+  <!-- FormSubmit.co action: sends email to rahilmuliashia94@gmail.com -->
+  <form action="https://formsubmit.co/rahilmuliashia94@gmail.com" method="POST" target="_blank" style="background:#fff;padding:20px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.08);">
+    <!-- Hidden inputs for FormSubmit behavior -->
+    <input type="hidden" name="_subject" value="New iStratech contact form submission">
+    <!-- optional: use _captcha to enable FormSubmit captcha (leave out to use default) -->
+    <!-- <input type="hidden" name="_captcha" value="true"> -->
+
+    <!-- honeypot field to reduce spam (leave hidden) -->
+    <input type="text" name="_honey" style="display:none">
+
+    <!-- Visible fields -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <div style="flex:1 1 300px; min-width:220px;">
+        <label style="font-size:13px;color:#333">Full Name <span style="color:#c00">*</span></label>
+        <input name="name" required type="text" placeholder="Your full name" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #ddd;font-size:15px;">
+      </div>
+
+      <div style="flex:1 1 300px; min-width:220px;">
+        <label style="font-size:13px;color:#333">Email (optional)</label>
+        <input name="email" type="email" placeholder="you@example.com" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #ddd;font-size:15px;">
+      </div>
+
+      <div style="flex:1 1 300px; min-width:220px;">
+        <label style="font-size:13px;color:#333">Phone (optional)</label>
+        <input name="phone" type="tel" placeholder="+91 99 9999 9999" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #ddd;font-size:15px;">
+      </div>
+
+      <div style="flex:1 1 300px; min-width:220px;">
+        <label style="font-size:13px;color:#333">Company (optional)</label>
+        <input name="company" type="text" placeholder="Company name" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #ddd;font-size:15px;">
+      </div>
+
+      <div style="flex:1 1 100%; min-width:220px;">
+        <label style="font-size:13px;color:#333">Address (optional)</label>
+        <input name="address" type="text" placeholder="Street, City, State, Country" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #ddd;font-size:15px;">
+      </div>
+
+      <div style="flex:1 1 100%; min-width:220px;">
+        <label style="font-size:13px;color:#333">Description / Message <span style="color:#c00">*</span></label>
+        <textarea name="message" required rows="6" placeholder="Tell us about your project or query..." style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #ddd;font-size:15px;resize:vertical;"></textarea>
+      </div>
+    </div>
+
+    <!-- small note and submit -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;flex-wrap:wrap;">
+      <div style="color:#444;font-size:14px;">ISRATECH will contact you shortly.</div>
+
+      <button type="submit" style="background:#2b1bd6;color:#fff;border:0;padding:10px 18px;border-radius:10px;font-weight:700;cursor:pointer;font-size:15px;">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
