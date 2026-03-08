@@ -1,128 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Why Choose Everest Security — Everest Security Pvt. Ltd.</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Why Choose Us | Everest Security</title>
-
-<link rel="stylesheet" href="script.css">
-
-<style>
-
-body{
-background:#0b0f1a;
-color:white;
-font-family:Arial;
-margin:0;
-}
-
-.hero{
-height:60vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(120deg,#0b0f1a,#111a2e);
-}
-
-.hero h1{
-font-size:60px;
-}
-
-.section{
-max-width:1200px;
-margin:auto;
-padding:120px 20px;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:40px;
-margin-top:80px;
-}
-
-.card{
-background:rgba(255,255,255,.05);
-border-radius:20px;
-padding:40px;
-transition:.4s;
-backdrop-filter:blur(10px);
-}
-
-.card:hover{
-transform:translateY(-12px);
-box-shadow:0 0 40px rgba(0,150,255,.4);
-}
-
-.card h3{
-color:#3aa8ff;
-}
-
-footer{
-text-align:center;
-padding:60px;
-opacity:.6;
-}
-
-</style>
-
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="why-us.html">Why Choose Us</a>
-</nav>
+<header class="navbar">
+  <div class="nav-container">
+    <div class="logo">ISRATECH</div>
 
-<section class="hero">
-<h1>Why Choose Us</h1>
-</section>
+    <nav>
+      <a href="index.html#home">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="why-us.html">Why Choose Us</a>
+      <a href="index.html#solutions">Solutions</a>
+      <a href="index.html#products">Products</a>
+      <a href="contact.html">Contact</a>
+    </nav>
 
-<section class="section">
+    <button class="cta" onclick="location.href='contact.html'">Get Quote</button>
+  </div>
+</header>
 
-<div class="cards">
+<!-- ========== Why Choose Us — expanded content (keeps your classes) ========== -->
+<main>
+  <section class="why-us full-why">
+    <h1>Why Choose Everest Security</h1>
 
-<div class="card">
-<h3>20+ Years Experience</h3>
-<p>Trusted security provider operating since 2003 with thousands of protected clients.</p>
+    <div class="why-intro">
+      <p>
+        Everest Security brings Israeli hi-tech systems and a trained 24/7 monitoring team together to protect homes,
+        businesses and high-value sites. We verify alarms quickly, reduce false positives with multi-sensor analytics,
+        and maintain systems so they work when it matters most.
+      </p>
+
+      <p class="muted">
+        Below you’ll find capabilities, process, proof (case studies), team, gallery and FAQ — everything to help you
+        decide with confidence.
+      </p>
+    </div>
+
+    <!-- hero row -->
+    <div class="cards hero-why">
+      <div class="card hero-card">
+        <img src="EVEREST-PLATINUM.jpg" alt="Everest Platinum monitoring platform" class="card-img-large">
+        <div class="hero-card-text">
+          <h2>24/7 Live Monitoring — humans + tech</h2>
+          <p>
+            Our control room is staffed by trained operators 24 hours a day, every day. When a sensor or camera reports an
+            event, operators verify using video/audio and sensor correlation before escalation. That means fewer false
+            alarms and faster dispatch of real responders when required.
+          </p>
+
+          <ul>
+            <li>Verified events — we don’t simply ring a bell.</li>
+            <li>Fast escalation protocols — direct lines to local responders.</li>
+            <li>Continuous system health monitoring with automatic alerts.</li>
+          </ul>
+
+          <div class="hero-ctas">
+            <a class="primary" href="contact.html">Get a Free Site Survey</a>
+            <button class="secondary demo-btn">Watch Monitoring Demo</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hero-side">
+        <h3>Why verification matters</h3>
+        <p>
+          False alarms waste time and reduce trust. We combine motion, tamper and environmental sensors with short
+          camera clips and operator checks so only real threats are escalated. This saves money and improves response
+          quality for you and emergency services.
+        </p>
+
+        <div class="mini-stats">
+          <div class="mini-stat">
+            <div class="num">24/7</div>
+            <div class="label">Monitoring</div>
+          </div>
+          <div class="mini-stat">
+            <div class="num">5000+</div>
+            <div class="label">Installations</div>
+          </div>
+          <div class="mini-stat">
+            <div class="num">99.9%</div>
+            <div class="label">Uptime Target</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- deep feature cards -->
+    <div class="cards feature-deep">
+      <div class="card">
+        <img src="CONTROL-PANEL-ACCESSORIES.jpg" alt="Control panel hardware" class="card-img">
+        <h3>Robust Control Panels</h3>
+        <p>
+          Enterprise-grade panels with redundant reporting (IP/GSM), secure firmware and modular add-ons. Remote management
+          enables diagnostics without site visits.
+        </p>
+        <p class="small">Typical uses: banks, warehouses, data centres, campuses.</p>
+      </div>
+
+      <div class="card">
+        <img src="CEILING-MOUNT.jpg" alt="Ceiling mount motion sensors" class="card-img">
+        <h3>Sensor Fusion & False-Alarm Reduction</h3>
+        <p>
+          Motion + camera + environment sensing tuned per site. Day/night behaviours and high-traffic adjustments reduce
+          nuisance alarms.
+        </p>
+      </div>
+
+      <div class="card">
+        <img src="EXTERNAL-DETECTION-SENSORS-EDS-SERIES.jpg" alt="Perimeter sensors" class="card-img">
+        <h3>Perimeter & Exterior Detection</h3>
+        <p>
+          External detection arrays tuned for weather and vegetation. Triggers lights, PTZ sweeps and verification workflows.
+        </p>
+      </div>
+
+      <div class="card">
+        <img src="Z-SERIES.jpg" alt="Wireless devices" class="card-img">
+        <h3>Wireless Resilient Systems</h3>
+        <p>
+          Low-power wireless mesh with GSM backup when needed — ideal where wiring is difficult.
+        </p>
+      </div>
+
+      <div class="card">
+        <img src="MS-SERIES.jpg" alt="Multi-sensor detection" class="card-img">
+        <h3>AI-Assisted Video Analytics</h3>
+        <p>
+          Optional analytics: object detection, loitering, line-crossing. Tuned to reduce false alerts from routine activity.
+        </p>
+      </div>
+
+      <div class="card">
+        <img src="FREEWAVE-ACCESSORIES.jpg" alt="Wireless accessories" class="card-img">
+        <h3>Scalable, Modular Design</h3>
+        <p>
+          Systems designed to grow. We keep changes backward-compatible and provide central firmware updates.
+        </p>
+      </div>
+    </div>
+
+    <!-- process -->
+    <div class="why-process">
+      <h3>Our simple 5-step protection process</h3>
+      <div class="cards process-cards">
+        <div class="card process"><h4>1. Site Survey</h4>
+          <p>We map blind spots and recommend sensor placement — on-site or remote.</p></div>
+
+        <div class="card process"><h4>2. Design & Plan</h4>
+          <p>We finalise reporting channels, power backup and integrations for a predictable install.</p></div>
+
+        <div class="card process"><h4>3. Professional Install</h4>
+          <p>Certified technicians install, align and test every device.</p></div>
+
+        <div class="card process"><h4>4. Monitor & Verify</h4>
+          <p>Operators verify and escalate per your plan — audio/video checks included.</p></div>
+
+        <div class="card process"><h4>5. Maintain & Improve</h4>
+          <p>Routine checks, remote diagnostics and firmware updates keep systems healthy.</p></div>
+      </div>
+    </div>
+
+    <!-- expanded stats -->
+    <section class="why-stats stats expanded-stats">
+      <div class="stat"><h2 data-target="20">0</h2><p>Years Experience</p></div>
+      <div class="stat"><h2 data-target="5000">0</h2><p>Installations</p></div>
+      <div class="stat"><h2 data-target="1000">0</h2><p>Clients Protected</p></div>
+      <div class="stat"><h2 data-target="250000">0</h2><p>Hours Monitored (monthly)</p></div>
+      <div class="stat"><h2 data-target="99">0</h2><p>Uptime (%)</p></div>
+    </section>
+
+    <!-- case studies -->
+    <div class="why-case-studies">
+      <h3>Case Studies</h3>
+      <div class="cards case-cards">
+        <div class="card case">
+          <h4>Logistics Yard — Theft Reduction</h4>
+          <img src="KD-SERIES.jpg" alt="Perimeter protection KD series" class="case-img">
+          <p>Perimeter EDS, PTZ cameras + operator verification reduced theft incidents by 92% in three months.</p>
+        </div>
+
+        <div class="card case">
+          <h4>Bank Branch — ATM & Lobby Security</h4>
+          <img src="ACTEC-SERIES.jpg" alt="Actec series" class="case-img">
+          <p>Silent alarms + live verification led to a quick police response and arrest in one incident.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- gallery -->
+    <div class="why-gallery">
+      <h3>Gallery</h3>
+      <div class="gallery-grid cards">
+        <div class="card gallery-item" data-img="EVEREST-PLATINUM.jpg" tabindex="0"><img src="EVEREST-PLATINUM.jpg" alt="Control Centre"><p class="caption">Control Centre</p></div>
+        <div class="card gallery-item" data-img="ACTEC-SERIES.jpg" tabindex="0"><img src="ACTEC-SERIES.jpg" alt="Actec"><p class="caption">Actec Series</p></div>
+        <div class="card gallery-item" data-img="CEILING-MOUNT.jpg" tabindex="0"><img src="CEILING-MOUNT.jpg" alt="Ceiling sensor"><p class="caption">Indoor Sensors</p></div>
+        <div class="card gallery-item" data-img="EXTERNAL-DETECTION-SENSORS-EDS-SERIES.jpg" tabindex="0"><img src="EXTERNAL-DETECTION-SENSORS-EDS-SERIES.jpg" alt="Perimeter"><p class="caption">Perimeter Sensors</p></div>
+        <div class="card gallery-item" data-img="Z-SERIES.jpg" tabindex="0"><img src="Z-SERIES.jpg" alt="Wireless devices"><p class="caption">Wireless Devices</p></div>
+        <div class="card gallery-item" data-img="FREEWAVE-ACCESSORIES.jpg" tabindex="0"><img src="FREEWAVE-ACCESSORIES.jpg" alt="Accessories"><p class="caption">Network Accessories</p></div>
+      </div>
+    </div>
+
+    <!-- testimonials -->
+    <div class="why-testimonials">
+      <h3>What clients say</h3>
+      <div class="cards">
+        <div class="card testimonial"><p>“Everest's monitoring team saved our plant — verified an intrusion and police arrived within minutes.”</p><cite>— A. Shah, Factory Manager</cite></div>
+        <div class="card testimonial"><p>“No more false alarms. System performs as promised and support responds quickly.”</p><cite>— M. Iyer, Bank Operations</cite></div>
+        <div class="card testimonial"><p>“Professional install and timely follow-up — they took care of everything end-to-end.”</p><cite>— S. Kumar, Logistics</cite></div>
+      </div>
+    </div>
+
+    <!-- certifications -->
+    <div class="why-badges">
+      <h3>Certifications & Partnerships</h3>
+      <div class="cards badges-cards">
+        <div class="card badge">ISO 9001</div>
+        <div class="card badge">Local Police Approved</div>
+        <div class="card badge">Insurance Partner</div>
+        <div class="card badge">Authorized Installers</div>
+        <div class="card badge">Official Tech Partners</div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="why-faq">
+      <h3>Frequently Asked Questions</h3>
+      <div class="cards faq-cards">
+        <div class="card faq-item">
+          <button class="faq-q">How fast is the response after an alarm?</button>
+          <div class="faq-a">
+            <p>Response depends on your escalation plan. Verified alarms are prioritised and local responders are contacted quickly when required.</p>
+          </div>
+        </div>
+
+        <div class="card faq-item">
+          <button class="faq-q">Do you provide remote diagnostics?</button>
+          <div class="faq-a">
+            <p>Yes — most issues are resolved remotely. We monitor device health and push firmware updates centrally.</p>
+          </div>
+        </div>
+
+        <div class="card faq-item">
+          <button class="faq-q">Can you integrate with our existing cameras?</button>
+          <div class="faq-a">
+            <p>We support many standard cameras and integrate legacy systems using gateway interfaces.</p>
+          </div>
+        </div>
+
+        <div class="card faq-item">
+          <button class="faq-q">Is monitoring available 24/7?</button>
+          <div class="faq-a">
+            <p>Yes — our monitoring centre operates 24/7/365 with redundancy and trained operators.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- team preview -->
+    <div class="why-team">
+      <h3>Our team</h3>
+      <div class="cards team-cards">
+        <div class="card"><img src="EVEREST-SECURITY-ACCESSORIES.jpg" alt="Technician" class="team-img"><h4>Head of Monitoring</h4><p>10+ years in command centre ops.</p></div>
+        <div class="card"><img src="MR-SERIES.jpg" alt="Engineer" class="team-img"><h4>Lead Installer</h4><p>Certified specialist for large sites.</p></div>
+        <div class="card"><img src="CSB-DIGILON.jpg" alt="Support" class="team-img"><h4>Remote Support</h4><p>Firmware & diagnostics.</p></div>
+      </div>
+    </div>
+
+    <!-- final CTA -->
+    <div class="why-cta final-cta">
+      <a class="primary" href="contact.html">Request Free Site Survey</a>
+      <a class="secondary" href="contact.html">Request Pricing</a>
+      <button class="secondary demo-btn">Play Monitoring Demo</button>
+      <a class="primary" href="brochure.pdf" download>Download Brochure</a>
+    </div>
+  </section>
+</main>
+<!-- ========== end why choose us content ========== -->
+
+<!-- product / demo popup (self-contained so page works standalone) -->
+<div class="product-popup" id="popup" aria-hidden="true" style="display:none;">
+  <div class="popup-content" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <div class="popup-close" id="popup-close" title="Close">✕</div>
+    <img id="popup-img" src="" alt="">
+    <h3 id="popup-title"></h3>
+    <p id="popup-text"></p>
+  </div>
 </div>
 
-<div class="card">
-<h3>24/7 Monitoring</h3>
-<p>Advanced control centers providing continuous real-time monitoring.</p>
-</div>
-
-<div class="card">
-<h3>Israeli Technology</h3>
-<p>Using world-class security technologies and intelligent monitoring systems.</p>
-</div>
-
-<div class="card">
-<h3>Professional Team</h3>
-<p>Highly trained experts capable of rapid response and system management.</p>
-</div>
-
-<div class="card">
-<h3>Nationwide Protection</h3>
-<p>Providing services to banks, factories, offices, homes and government sectors.</p>
-</div>
-
-<div class="card">
-<h3>Smart Security Systems</h3>
-<p>Alarm monitoring, theft detection, fire detection and emergency systems.</p>
-</div>
-
-</div>
-
-</section>
-
-<footer>
-Everest Security Pvt. Ltd.
-</footer>
-
+<script src="script.js"></script>
 </body>
 </html>
