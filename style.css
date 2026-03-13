@@ -778,10 +778,11 @@ grid-template-columns:1fr;
 direction:ltr;
 }
 /* =========================
-   MEGA NAVBAR (REPLACEMENT)
-   Replace ONLY the mega-nav block with this.
-   Fixes: prevents inline expansion, controls wrapping,
-   centers dropdown, improves hover + keyboard access.
+   REPLACEMENT MEGA NAVBAR BLOCK
+   Paste this whole block in place of your original .dropdown / .mega-menu rules.
+   Fixes: prevents inline expansion, avoids taking full page height,
+   uses visibility/opacity for smooth show/hide, supports internal scrolling,
+   and preserves .mega-menu.open for mobile toggling.
    ========================= */
 
 .navbar nav {
@@ -799,61 +800,75 @@ direction:ltr;
   position: relative;
 }
 
-/* make each dropdown wrapper an inline-block context so it doesn't expand full width */
+/* each dropdown wrapper is an inline-block so it won't expand full width */
 .dropdown {
   position: relative;
   display: inline-block;
   vertical-align: middle;
 }
 
-/* hidden by default so it cannot push content into one long line */
+/* base hidden state for the mega menu (does not affect layout) */
 .mega-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);
   left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  transform: translateX(-50%) translateY(8px);
   width: min(1200px, 95vw);
   background: #ffffff;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-  padding: 24px 30px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.10);
+  padding: 22px 26px;
   border-radius: 10px;
 
   /* layout: responsive grid that wraps into sensible columns */
-  display: none;               /* hidden until hover/focus */
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 18px;
-  white-space: normal;         /* allow wrapping inside grid items */
+  white-space: normal;
+  box-sizing: border-box;
 
+  /* hidden visually and removed from pointer flow */
+  visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .22s ease, transform .22s ease;
-  box-sizing: border-box;
+  transform-origin: top center;
+  transition: opacity .20s ease, transform .20s ease, visibility .20s;
+  max-height: 70vh;     /* prevent it from growing full-page */
+  overflow: auto;       /* internal scrolling when content is tall */
+  overscroll-behavior: contain;
   z-index: 1200;
 }
 
-/* Reveal on hover or keyboard focus */
+/* show on hover or keyboard focus (desktop) */
 .dropdown:hover > .mega-menu,
 .dropdown:focus-within > .mega-menu {
-  display: grid;
+  visibility: visible;
   opacity: 1;
   transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
 
-/* columns inside mega menu */
+/* manual open (useful for mobile toggles via JS) */
+.mega-menu.open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* columns inside the mega menu */
 .mega-column {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-/* ensure links are block-level so very long labels wrap vertically */
+/* ensure links wrap and are easy to hit */
 .mega-column a {
   display: block;
   color: #333;
   font-size: 14px;
   text-decoration: none;
-  padding: 4px 2px;
+  padding: 6px 2px;
   line-height: 1.25;
   transition: color .18s ease, transform .18s ease;
 }
@@ -865,7 +880,6 @@ direction:ltr;
   outline: none;
 }
 
-/* optional small heading style inside columns */
 .mega-column strong {
   font-size: 13px;
   color: #555;
@@ -873,37 +887,44 @@ direction:ltr;
   margin-bottom: 6px;
 }
 
-/* dropdown arrow indicator */
+/* dropdown arrow indicator on parent link */
 .dropdown > a::after {
   content: " ▼";
   font-size: 10px;
   margin-left: 6px;
 }
 
-/* Small screens: collapse behavior (keeps things tidy) */
+/* small screens: static flow (inside the nav), hidden by default;
+   JS can toggle .open on .mega-menu to reveal the mobile menu */
 @media (max-width: 900px) {
   .mega-menu {
     position: static;
     transform: none;
-    display: none; /* keep hidden by default on small screens */
-    opacity: 1;
-    pointer-events: auto;
+    top: auto;
+    left: auto;
     width: 100%;
     padding: 12px 14px;
     box-shadow: none;
     border-radius: 0;
+    display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
+
+    /* hidden by default on small screens; .open shows it */
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    max-height: none;
+    overflow: visible;
+    transition: none;
   }
 
-  /* If you want to toggle the menu via JS on mobile, add .open to .mega-menu */
   .mega-menu.open {
-    display: grid;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
   }
 
-  .navbar nav {
-    gap: 12px;
-  }
-
+  .navbar nav { gap: 12px; }
   .mega-column a { padding: 8px 4px; }
 }
