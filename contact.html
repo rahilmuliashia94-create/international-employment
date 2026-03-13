@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Everest Security Pvt. Ltd.</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Page-scoped styles for contact layout (white / gray theme)
+       Keeps your global design language (cards, radius, shadows).
+       Paste only in contact.html — does not modify global files. */
+
+    :root{
+      --card-bg: #ffffff;
+      --card-ink: #0b1220;
+      --muted: #6b7280;
+      --edge: rgba(6,22,63,0.06);
+      --accent: #0077ff;
+      --panel: linear-gradient(180deg,#ffffff,#f6f7f9);
+    }
+
+    body {
+      background: #f3f4f6; /* soft gray page background */
+    }
+
+    /* big rounded stage like in the image */
+    .contact-stage {
+      max-width: 1180px;
+      margin: 120px auto;
+      padding: 34px;
+      border-radius: 36px;
+      background: var(--panel);
+      box-shadow:
+        0 18px 50px rgba(11,18,32,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+      border: 1px solid rgba(11,18,32,0.04);
+      overflow: hidden;
+    }
+
+    /* inside grid: left big heading + right form */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    /* left column */
+    .contact-left {
+      padding: 8px 18px;
+      color: var(--card-ink);
+    }
+
+    .big-heading {
+      font-size: 64px;
+      line-height: 0.95;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin: 6px 0 18px;
+      color: var(--card-ink);
+    }
+
+    /* smaller subtitle / intro */
+    .contact-left p.lead {
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 26px;
+    }
+
+    /* contact methods block like image left-bottom */
+    .contact-methods {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .method {
+      padding: 10px 6px;
+    }
+    .method .title { font-weight: 600; color: var(--muted); font-size: 13px; margin-bottom:6px; }
+    .method .value { color: var(--card-ink); font-weight:700; font-size:14px; }
+
+    /* right column: form card (slightly elevated) */
+    .contact-form-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(247,248,250,0.95));
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(6,22,63,0.06);
+      border: 1px solid rgba(6,22,63,0.04);
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    label {
+      font-size: 13px;
+      color: var(--muted);
+      display:block;
+      margin-bottom:6px;
+      font-weight:600;
+    }
+
+    .input, textarea, select {
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid rgba(11,18,32,0.08);
+      background: #fff;
+      font-size:14px;
+      color:var(--card-ink);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+      outline:none;
+      transition: box-shadow .12s ease, transform .12s ease;
+    }
+
+    .input:focus, textarea:focus, select:focus {
+      box-shadow: 0 6px 20px rgba(0,119,255,0.06);
+      border-color: rgba(0,119,255,0.16);
+      transform: translateY(-1px);
+    }
+
+    textarea {
+      min-height: 160px;
+      resize:vertical;
+      line-height:1.5;
+    }
+
+    .subject-row {
+      display:block;
+    }
+
+    /* small counter and hint */
+    .meta-row {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* submit button: wide, pill */
+    .submit-row {
+      margin-top:12px;
+    }
+
+    .btn-pill {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      padding:14px 22px;
+      border-radius:999px;
+      background: linear-gradient(90deg,#ffffff,#f2f3f6);
+      border:1px solid rgba(11,18,32,0.06);
+      color:var(--card-ink);
+      font-weight:700;
+      cursor:pointer;
+      box-shadow: 0 12px 30px rgba(6,22,63,0.06);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+
+    .btn-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(6,22,63,0.08);
+    }
+
+    /* small helpers */
+    .muted { color: var(--muted); font-size:13px; }
+    .form-note { font-size:13px; color:var(--muted); margin-top:8px; }
+
+    /* responsive */
+    @media (max-width: 980px) {
+      .contact-stage { margin: 48px 18px; padding:20px; border-radius:20px; }
+      .contact-grid { grid-template-columns: 1fr; gap:22px; }
+      .big-heading { font-size:44px; }
+      .row { grid-template-columns:1fr; }
+      .contact-left { order:2; }
+      .contact-form-card { order:1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR (keeps your original navbar markup) -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">ISRATECH</div>
+
+      <nav>
+        <a href="index.html#home">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="why-us.html">Why Choose Us</a>
+        <div class="dropdown">
+          <a href="#solutions">Solutions</a>
+          <div class="mega-menu">
+            <div class="mega-column">
+              <a>Banking & Finance</a>
+              <a>Parking</a>
+              <a>Hotel</a>
+              <a>Retail</a>
+            </div>
+            <div class="mega-column">
+              <a>Healthcare & Pharma</a>
+              <a>Mobile Transport</a>
+              <a>Industrial</a>
+              <a>Traffic</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <a href="#products">Products</a>
+          <div class="mega-menu">
+            <div class="mega-column">
+              <a>Network Camera</a>
+              <a>Analog Camera</a>
+              <a>Thermal Camera</a>
+            </div>
+            <div class="mega-column">
+              <a>VMS</a>
+              <a>Access Control</a>
+              <a>Intercom</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+
+      <button class="cta" onclick="location.href='contact.html'">Get Quote</button>
+    </div>
+  </header>
+
+  <!-- MAIN STAGE -->
+  <main>
+    <section class="contact-stage" aria-labelledby="contact-title">
+      <div class="contact-grid">
+
+        <!-- LEFT: Big heading and contact methods -->
+        <div class="contact-left">
+          <h1 id="contact-title" class="big-heading">Get in<br><span style="font-style:italic;font-weight:600;">Touch</span></h1>
+
+          <p class="lead">For all enquiries — technical support, installations or quotes — use the form on the right.
+            We operate a 24/7 monitoring desk and aim to respond to daytime enquiries within the same business day.</p>
+
+          <div class="contact-methods">
+            <div class="method">
+              <div class="title">Email Support</div>
+              <div class="value">support@everestsecurityonline.com</div>
+            </div>
+
+            <div class="method">
+              <div class="title">Live Chat</div>
+              <div class="value">Available 24/7 via in-app chat</div>
+            </div>
+
+            <div class="method">
+              <div class="title">Phone Support</div>
+              <div class="value">+91 9624696247 (Mon–Fri 9AM–5PM)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Form card -->
+        <div class="contact-form-card" aria-hidden="false">
+          <form id="contactForm" class="contact-form" novalidate>
+            <div class="row">
+              <div>
+                <label for="name">Full name</label>
+                <input id="name" name="name" class="input" type="text" placeholder="Jhone David" required>
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" class="input" type="email" placeholder="example@email.com" required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" class="input" type="tel" placeholder="+91 9XXXXXXXXX">
+              </div>
+
+              <div>
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject" class="input" required>
+                  <option value="general">General Inquiries</option>
+                  <option value="technical">Technical Issues</option>
+                  <option value="installation">Request Installation</option>
+                  <option value="quote">Request Quote</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Write your message..." maxlength="1000" required></textarea>
+
+              <div class="meta-row">
+                <div class="form-note">Please provide as much detail as possible.</div>
+                <div id="charCount" class="muted">0 / 1000</div>
+              </div>
+            </div>
+
+            <div class="submit-row">
+              <button type="submit" class="btn-pill" id="submitBtn">
+                Submit &nbsp;↗
+              </button>
+            </div>
+
+            <div id="formMsg" class="form-note" role="status" aria-live="polite" style="display:none;margin-top:10px;"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- keep product-popup markup and script usage (script.js) untouched -->
+  <div class="product-popup" id="popup" aria-hidden="true" style="display:none;">
+    <div class="popup-content" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+      <div class="popup-close" id="popup-close" title="Close">✕</div>
+      <img id="popup-img" src="" alt="">
+      <h3 id="popup-title"></h3>
+      <p id="popup-text"></p>
+    </div>
+  </div>
+
+  <script>
+    // Small page-scoped JS: char counter + simple client-side validation and feedback
+    (function(){
+      const form = document.getElementById('contactForm');
+      const message = document.getElementById('message');
+      const charCount = document.getElementById('charCount');
+      const formMsg = document.getElementById('formMsg');
+      const submitBtn = document.getElementById('submitBtn');
+
+      function updateCount(){
+        const n = message.value.length;
+        charCount.textContent = `${n} / ${message.getAttribute('maxlength')}`;
+      }
+      if(message){
+        updateCount();
+        message.addEventListener('input', updateCount);
+      }
+
+      form.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        formMsg.style.display = 'none';
+        // basic validation
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const subject = form.subject.value;
+        const msg = form.message.value.trim();
+
+        if(!name || !email || !subject || !msg){
+          formMsg.style.display = 'block';
+          formMsg.textContent = 'Please complete all required fields before submitting.';
+          return;
+        }
+
+        // simulate successful submit (replace this with your real backend call)
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.6';
+        submitBtn.textContent = 'Sending...';
+
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '';
+          submitBtn.textContent = 'Submit ↗';
+          form.reset();
+          updateCount();
+          formMsg.style.display = 'block';
+          formMsg.textContent = 'Thanks — your message has been received. We will reply soon.';
+        }, 900);
+      });
+
+      // accessibility: focus visible style for keyboard users (optional)
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Tab') document.body.classList.add('show-focus');
+      });
+    })();
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
