@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Everest Admin — Accounts</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* frosted glass / premium cyber style */
+  --bg:#02060a;
+  --panel:#071217;
+  --muted:#96a6ac;
+  --accent:#16c76b;
+  --accent-2:#26e07f;
+  --card:#0b1416;
+  --glass: rgba(255,255,255,0.03);
+  --radius:18px;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --modal-bg: rgba(20,24,26,0.6);
+  --modal-blur: 8px;
+  --neon-width: 3px;
+  --neon-color: rgba(38,230,127,0.95);
+  --button-gradient: linear-gradient(90deg,var(--accent),var(--accent-2));
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#031018);font-family:var(--font);-webkit-font-smoothing:antialiased;color:#e6f7ef}
+.container{max-width:1280px;margin:18px auto;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.12));border:1px solid rgba(255,255,255,0.02)}
+
+/* layout */
+.app{display:flex;gap:12px}
+
+/* sidebar (kept from previous admin style) */
+.sidebar{
+  width:220px;
+  background:linear-gradient(180deg, rgba(1,4,9,0.9), rgba(2,6,10,0.9));
+  padding:12px;
+  border-radius:8px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  border-right:1px solid rgba(255,255,255,0.02);
+}
+.brand{ color:var(--accent); font-weight:800; font-size:16px; display:flex; gap:8px; align-items:center;}
+.brand .logo-dot{ width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,var(--accent),var(--accent-2)); display:inline-flex; align-items:center; justify-content:center; color:#042114; font-weight:800; font-size:13px; }
+
+.searchbox{ background:var(--glass); border-radius:8px; padding:8px 10px; color:var(--muted); font-size:13px; }
+
+/* menu */
+.menu { margin-top:6px; display:flex; flex-direction:column; gap:6px; }
+.menu .section{ color:var(--muted); font-size:11.5px; margin-top:6px; letter-spacing:0.6px;}
+.menu a{ display:flex; align-items:center; gap:8px; color:#cfe8d6; text-decoration:none; padding:8px; border-radius:8px; font-size:13px; }
+.menu a.active{ background: linear-gradient(90deg, rgba(34,197,94,0.12), rgba(34,197,94,0.04)); color:#fff; transform:translateX(3px); }
+
+/* main area */
+.main{flex:1;display:flex;flex-direction:column;gap:12px;padding:6px}
+.header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.header h1{margin:0;font-size:18px;color:#eafcf0}
+.controls{display:flex;gap:8px;align-items:center}
+
+/* controls */
+.btn{padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-add{background:var(--button-gradient);color:#042114;box-shadow:0 10px 30px rgba(22,199,107,0.08)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+
+/* card & table */
+.card{background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.search{background:var(--glass);padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);width:320px;color:var(--muted)}
+.table-wrap{overflow:auto;max-height:560px;border-radius:8px}
+.table{width:100%;border-collapse:collapse;font-size:13px;color:#e7f3f7}
+.table thead th{position:sticky;top:0;background:transparent;padding:12px;text-align:left;color:var(--muted);font-weight:600;border-bottom:1px solid rgba(255,255,255,0.03)}
+.table tbody td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.row-actions{display:flex;gap:8px;align-items:center}
+
+/* logo thumbnail */
+.logo-thumb{width:46px;height:46;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#072a20,#08221d);border:1px solid rgba(255,255,255,0.02);font-weight:800;color:#bff6d4}
+.pill{padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
+.pill-active{background:linear-gradient(90deg,#064e31,var(--accent));color:#eaffef}
+.pill-suspended{background:linear-gradient(90deg,#2f2f2f,#1f1f1f);color:#f3e6e6}
+
+/* 3-dot dropdown */
+.dd{position:relative}
+.dotbtn{width:36px;height:36px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted)}
+.dropdown{position:absolute;right:0;top:46px;background:#0f1b1d;border-radius:8px;padding:8px;border:1px solid rgba(255,255,255,0.03);min-width:200px;z-index:80;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+.dropdown button{display:block;width:100%;padding:8px;border-radius:8px;background:transparent;border:none;color:var(--muted);text-align:left;cursor:pointer}
+.dropdown button:hover{color:#eaffef;background:rgba(255,255,255,0.02)}
+
+/* ----------------------------
+   FROSTED MODAL + NEON ANIMATED BORDER
+   ---------------------------- */
+/* backdrop */
+.modal-backdrop{position:fixed;left:0;top:0;width:100%;height:100%;background:linear-gradient(180deg, rgba(1,2,3,0.55), rgba(1,2,3,0.6));display:none;align-items:center;justify-content:center;z-index:220;padding:28px;}
+.modal-backdrop.open{display:flex}
+
+/* container that holds neon border (uses before for animated stroke) */
+.modal-frame{
+  position:relative;
+  width:94%;
+  max-width:820px;
+  border-radius:20px;
+  padding:6px; /* space for neon stroke */
+  pointer-events:auto;
+}
+
+/* animated neon edge: uses background gradient moving */
+.modal-frame::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  padding: var(--neon-width);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  background: conic-gradient(from 0deg, rgba(38,230,127,0.95), rgba(56,220,165,0.8), rgba(38,230,127,0.95), rgba(56,220,165,0.8));
+  filter: blur(6px) saturate(130%);
+  animation: spin 6s linear infinite;
+  pointer-events:none;
+  opacity:0.95;
+}
+
+/* actual frosted modal card inside the neon frame */
+.modal-card{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+  background: linear-gradient(180deg, rgba(18,22,24,0.68), rgba(12,16,18,0.55));
+  border:1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(var(--modal-blur));
+  -webkit-backdrop-filter: blur(var(--modal-blur));
+  padding:26px;
+  color:#e7f7ef;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+
+/* small decorative inner glow */
+.modal-card::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:0;height:6px;
+  background: linear-gradient(90deg, rgba(22,199,107,0.06), rgba(56,220,165,0.04));
+  pointer-events:none;
+}
+
+/* title */
+.modal-card h2{margin:0;color:var(--accent);font-weight:800;text-align:center;font-size:20px;letter-spacing:0.2px}
+
+/* form */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.form-row{display:flex;flex-direction:column;gap:8px}
+.input{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#eafaf0;font-size:14px;outline:none}
+.input::placeholder{color:#7f9a91}
+.select{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#eafaf0}
+.input[type="file"]{padding:10px}
+
+/* price input emphasis */
+.price-row{display:flex;gap:8px;align-items:center}
+.price-input{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#eafaf0}
+
+/* buttons */
+.modal-actions{display:flex;gap:12px;justify-content:center;margin-top:18px}
+.btn-submit{background:var(--button-gradient);color:#042114;border-radius:12px;padding:14px 22px;font-weight:800;border:none;font-size:15px;cursor:pointer;box-shadow:0 8px 30px rgba(22,199,107,0.12)}
+.btn-cancel{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:12px;cursor:pointer;color:#e7f3f7}
+
+/* view read rows */
+.read-row{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));margin-top:10px;color:#e7f3f7}
+
+/* small muted */
+.small-muted{ color:var(--muted); font-size:12px; }
+
+/* keyframe for neon movement */
+@keyframes spin{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+/* responsive */
+@media (max-width:980px){
+  .app{flex-direction:column}
+  .form-grid{grid-template-columns:1fr}
+  .modal-frame{padding:4px}
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="app">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" aria-label="Main sidebar">
+        <div class="brand"><div class="logo-dot">E</div> Everest Admin</div>
+        <div class="searchbox">🔍 Search</div>
+
+        <nav class="menu">
+          <div class="section">DASHBOARDS</div>
+          <a class="active" href="admin.html">Overview</a>
+          <a href="accounts.html">Accounts</a>
+          <a href="#">Analytics</a>
+          <a href="#">Customers</a>
+          <div class="section">SETTINGS</div>
+          <a href="#">Messages</a>
+          <a href="#">Customer Reviews</a>
+          <a href="#">Help Centre</a>
+        </nav>
+
+        <div style="margin-top:auto; color:var(--muted); font-size:12px;">
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></div>
+            <div>Online</div>
+          </div>
+          <div style="margin-top:8px; font-size:12px">Everest Security Pvt. Ltd.</div>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main" role="main">
+        <div class="header">
+          <h1>Accounts — Command Center</h1>
+
+          <div class="controls">
+            <input id="search" class="search" placeholder="Search company, username or email">
+            <button id="addNewBtn" class="btn btn-add">＋ Add New</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="topbar">
+            <div style="display:flex;gap:12px;align-items:center">
+              <label><input id="selectAll" type="checkbox"></label>
+              <div class="pill" style="background:rgba(255,255,255,0.02);color:var(--muted);font-weight:700;padding:6px 10px;border-radius:8px">Showing <span id="countDisplay">0</span> accounts</div>
+            </div>
+            <div class="small-muted">Accounts management</div>
+          </div>
+
+          <div class="table-wrap" aria-live="polite">
+            <table class="table" role="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Company</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th style="width:120px">Price</th>
+                  <th style="width:110px">Next Payment</th>
+                  <th style="width:110px">Status</th>
+                  <th style="width:110px">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="accountsBody"></tbody>
+            </table>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+            <div class="small-muted">Use the actions menu to manage accounts</div>
+            <div>
+              <button id="bulkDeleteBtn" class="btn btn-ghost">Delete Selected</button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- modal (frosted + neon) -->
+  <div id="modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-frame" role="presentation">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h2 id="modalTitle">Add New Client</h2>
+          <div><button id="modalClose" class="btn btn-ghost">✕</button></div>
+        </div>
+
+        <!-- form (Add / Edit) -->
+        <form id="clientForm" style="margin-top:12px">
+          <div class="form-grid">
+            <div>
+              <div class="form-row">
+                <label class="small-muted">Company name</label>
+                <input id="f_company" class="input" placeholder="Full company name" required>
+              </div>
+
+              <div class="form-row">
+                <label class="small-muted">Username</label>
+                <input id="f_username" class="input" placeholder="username_for_company" required>
+              </div>
+
+              <div class="form-row">
+                <label class="small-muted">Email (optional)</label>
+                <input id="f_email" class="input" placeholder="email@company.com">
+              </div>
+
+              <div class="form-row">
+                <label class="small-muted">Password (optional)</label>
+                <input id="f_password" class="input" type="password" placeholder="temporary password (optional)">
+              </div>
+
+              <div class="form-row">
+                <label class="small-muted">Phone (optional)</label>
+                <input id="f_phone" class="input" placeholder="+91 8000 123456">
+              </div>
+
+              <div class="form-row">
+                <label class="small-muted">Address</label>
+                <input id="f_address" class="input" placeholder="Full address">
+              </div>
+            </div>
+
+            <div>
+              <!-- price replaces plan -->
+              <div class="form-row">
+                <label class="small-muted">Price (monthly) — ₹</label>
+                <div class="price-row">
+                  <input id="f_price" class="price-input" placeholder="e.g. 2000" inputmode="numeric" pattern="[0-9]*">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <label class="small-muted">Auto renew</label>
+                <select id="f_autorenew" class="select"><option>ON</option><option>OFF</option></select>
+              </div>
+
+              <div class="form-row">
+                <label class="small-muted">Status</label>
+                <select id="f_status" class="select"><option value="active">Active</option><option value="suspended">Suspended</option></select>
+              </div>
+
+              <div class="form-row">
+                <label class="small-muted">Upload logo (optional)</label>
+                <input id="f_logo" type="file" accept="image/*" class="input">
+              </div>
+
+              <div class="form-row" style="margin-top:8px;">
+                <label class="small-muted">Notes (optional)</label>
+                <input id="f_notes" class="input" placeholder="Short note or identifier">
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" id="saveClientBtn" class="btn-submit">Submit</button>
+            <button type="button" id="cancelClientBtn" class="btn-cancel">Cancel</button>
+          </div>
+        </form>
+
+        <!-- view-only (dark frosted rows) -->
+        <div id="viewArea" style="display:none;margin-top:14px">
+          <div class="read-row"><strong id="v_company">Company</strong></div>
+          <div class="read-row" id="v_user">Username</div>
+          <div class="read-row" id="v_email">Email</div>
+          <div class="read-row">Price: <strong id="v_price">₹0</strong></div>
+          <div class="read-row">Auto renew: <span id="v_autorenew"></span></div>
+          <div class="read-row">Status: <span id="v_status"></span></div>
+          <div class="read-row">Phone: <span id="v_phone"></span></div>
+          <div class="read-row" id="v_address">Address</div>
+          <div class="read-row" id="v_notes">Notes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* Demo accounts (price field used, plan removed) */
+let accounts = [
+  {id:1,company:"Reliance Retail - Rajkot",username:"reliance_admin",email:"reliance@rajkot.com",price:2000,next:"2026-07-15",status:"active",autorenew:"ON",address:"MG Road, Rajkot",phone:"+91 8000123456",logo:null,notes:"Main retail"},
+  {id:2,company:"HDFC Bank ATM",username:"hdfc_admin",email:"hdfc@rajkot.com",price:2000,next:"2026-07-15",status:"active",autorenew:"ON",address:"Sector 5, Rajkot",phone:"",logo:null,notes:"ATM site"},
+  {id:3,company:"Crystal Mall",username:"crystal_admin",email:"",price:1800,next:"2026-07-15",status:"suspended",autorenew:"OFF",address:"Ring Road, Rajkot",phone:"+91 8987654321",logo:null,notes:"Large mall"},
+];
+let nextId = 4;
+
+const accountsBody = document.getElementById('accountsBody');
+const countDisplay = document.getElementById('countDisplay');
+
+/* Render table (Price shown) */
+function renderTable(filter='') {
+  accountsBody.innerHTML = '';
+  const q = (filter||'').trim().toLowerCase();
+  const filtered = accounts.filter(a => !q || a.company.toLowerCase().includes(q) || (a.email||'').toLowerCase().includes(q) || (a.username||'').toLowerCase().includes(q));
+  filtered.forEach(a => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input type="checkbox" class="rowSelect" data-id="${a.id}"></td>
+      <td style="display:flex;align-items:center;gap:12px">
+        <div class="logo-thumb">${a.logo?'<img src="'+a.logo+'" style="width:46px;height:46;border-radius:6px">':a.company.split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase()}</div>
+        <div style="min-width:220px"><div style="font-weight:800">${a.company}</div><div style="color:var(--muted);margin-top:6px">${a.address || ''}</div></div>
+      </td>
+      <td>${a.username}</td>
+      <td>${a.email || '—'}</td>
+      <td>₹${(a.price||0).toLocaleString()}</td>
+      <td>${a.next || '—'}</td>
+      <td>${a.status === 'active' ? '<span class="pill pill-active">Active</span>' : '<span class="pill pill-suspended">Suspended</span>'}</td>
+      <td>
+        <div class="row-actions">
+          <div class="dd">
+            <button class="dotbtn" onclick="toggleDropdown(event, ${a.id})">⋯</button>
+            <div id="menu-${a.id}" class="dropdown" style="display:none">
+              <button onclick="viewClient(${a.id})">View</button>
+              <button onclick="editClient(${a.id})">Edit</button>
+              <button onclick="resetPassword(${a.id})">Reset Password</button>
+              <button onclick="changePrice(${a.id})">Change Price</button>
+              <button onclick="toggleSuspend(${a.id})">${a.status==='active' ? 'Suspend' : 'Reactivate'}</button>
+              <button onclick="sendReminder(${a.id})">Send Reminder</button>
+              <button style="color:#ff8b8b" onclick="deleteClient(${a.id})">Delete account</button>
+            </div>
+          </div>
+        </div>
+      </td>
+    `;
+    accountsBody.appendChild(tr);
+  });
+
+  countDisplay.innerText = filtered.length;
+}
+
+/* Search */
+document.getElementById('search').addEventListener('input', (e)=> renderTable(e.target.value));
+
+/* Select all */
+document.getElementById('selectAll').addEventListener('change', (e)=> {
+  const checked = e.target.checked;
+  document.querySelectorAll('.rowSelect').forEach(cb => cb.checked = checked);
+});
+
+/* Modal controls */
+const modal = document.getElementById('modal');
+const clientForm = document.getElementById('clientForm');
+const viewArea = document.getElementById('viewArea');
+const modalTitle = document.getElementById('modalTitle');
+
+document.getElementById('addNewBtn').addEventListener('click', ()=> openAddForm());
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('cancelClientBtn').addEventListener('click', closeModal);
+
+function openAddForm(editId){
+  viewArea.style.display = 'none';
+  clientForm.style.display = 'block';
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+  modalTitle.innerText = editId ? 'Edit Client' : 'Add New Client';
+
+  // reset fields for add
+  document.getElementById('f_company').value = '';
+  document.getElementById('f_username').value = '';
+  document.getElementById('f_email').value = '';
+  document.getElementById('f_password').value = '';
+  document.getElementById('f_phone').value = '';
+  document.getElementById('f_address').value = '';
+  document.getElementById('f_price').value = '';
+  document.getElementById('f_autorenew').value = 'ON';
+  document.getElementById('f_status').value = 'active';
+  document.getElementById('f_logo').value = '';
+  document.getElementById('f_notes').value = '';
+
+  const saveBtn = document.getElementById('saveClientBtn');
+  saveBtn.onclick = function(){
+    const comp = document.getElementById('f_company').value.trim();
+    if(!comp){ alert('Company name required'); return; }
+    const username = document.getElementById('f_username').value.trim() || comp.split(' ').join('_').toLowerCase();
+    const email = document.getElementById('f_email').value.trim();
+    const phone = document.getElementById('f_phone').value.trim();
+    const address = document.getElementById('f_address').value.trim();
+    const price = Number(document.getElementById('f_price').value) || 0;
+    const autor = document.getElementById('f_autorenew').value;
+    const status = document.getElementById('f_status').value;
+    const notes = document.getElementById('f_notes').value.trim();
+    const fileInput = document.getElementById('f_logo');
+
+    if(fileInput.files && fileInput.files[0]){
+      const fr = new FileReader();
+      fr.onload = function(ev){
+        createAccount({company:comp,username,email,phone,address,price,autor,status,logo:ev.target.result,notes});
+      };
+      fr.readAsDataURL(fileInput.files[0]);
+    } else {
+      createAccount({company:comp,username,email,phone,address,price,autor,status,logo:null,notes});
+    }
+  };
+}
+
+function createAccount(payload){
+  const newAcc = {
+    id: nextId++,
+    company: payload.company,
+    username: payload.username,
+    email: payload.email,
+    price: payload.price || 0,
+    next: accounts.length ? accounts[0].next : '',
+    status: payload.status || 'active',
+    autorenew: payload.autor || 'ON',
+    address: payload.address || '',
+    phone: payload.phone || '',
+    logo: payload.logo || null,
+    notes: payload.notes || ''
+  };
+  accounts.unshift(newAcc);
+  alert('Client created (demo)');
+  closeModal();
+  renderTable(document.getElementById('search').value);
+}
+
+function closeModal(){
+  modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+}
+
+/* View client (read-only) */
+function viewClient(id){
+  const a = accounts.find(x=>x.id===id);
+  if(!a) return;
+  modalTitle.innerText = 'View Client';
+  clientForm.style.display = 'none';
+  viewArea.style.display = 'block';
+  document.getElementById('v_company').innerText = a.company;
+  document.getElementById('v_user').innerText = 'Username: ' + a.username;
+  document.getElementById('v_email').innerText = 'Email: ' + (a.email || '—');
+  document.getElementById('v_price').innerText = '₹' + (a.price || 0).toLocaleString();
+  document.getElementById('v_autorenew').innerText = a.autorenew || '—';
+  document.getElementById('v_status').innerText = a.status || '—';
+  document.getElementById('v_phone').innerText = a.phone || '—';
+  document.getElementById('v_address').innerText = a.address || '—';
+  document.getElementById('v_notes').innerText = a.notes || '—';
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+}
+
+/* Edit client (prefill the form) */
+function editClient(id){
+  const acc = accounts.find(a=>a.id===id);
+  if(!acc) return;
+  clientForm.style.display = 'block'; viewArea.style.display = 'none';
+  modalTitle.innerText = 'Edit Client';
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+
+  document.getElementById('f_company').value = acc.company;
+  document.getElementById('f_username').value = acc.username;
+  document.getElementById('f_email').value = acc.email || '';
+  document.getElementById('f_password').value = '';
+  document.getElementById('f_phone').value = acc.phone || '';
+  document.getElementById('f_address').value = acc.address || '';
+  document.getElementById('f_price').value = acc.price || '';
+  document.getElementById('f_autorenew').value = acc.autorenew || 'ON';
+  document.getElementById('f_status').value = acc.status || 'active';
+  document.getElementById('f_notes').value = acc.notes || '';
+
+  const saveBtn = document.getElementById('saveClientBtn');
+  saveBtn.onclick = function(){
+    acc.company = document.getElementById('f_company').value.trim();
+    acc.username = document.getElementById('f_username').value.trim();
+    acc.email = document.getElementById('f_email').value.trim();
+    acc.phone = document.getElementById('f_phone').value.trim();
+    acc.address = document.getElementById('f_address').value.trim();
+    acc.price = Number(document.getElementById('f_price').value) || acc.price;
+    acc.autorenew = document.getElementById('f_autorenew').value;
+    acc.status = document.getElementById('f_status').value;
+    acc.notes = document.getElementById('f_notes').value.trim() || acc.notes;
+    // If a logo file is chosen during edit, read it
+    const fileInput = document.getElementById('f_logo');
+    if(fileInput.files && fileInput.files[0]){
+      const fr = new FileReader();
+      fr.onload = function(ev){
+        acc.logo = ev.target.result;
+        alert('Client updated (demo)');
+        closeModal();
+        renderTable(document.getElementById('search').value);
+      };
+      fr.readAsDataURL(fileInput.files[0]);
+    } else {
+      alert('Client updated (demo)');
+      closeModal();
+      renderTable(document.getElementById('search').value);
+    }
+  };
+}
+
+/* Reset password (demo) */
+function resetPassword(id){
+  const acc = accounts.find(a=>a.id===id);
+  if(!acc) return;
+  const np = prompt(`Reset password for ${acc.company} (${acc.username})\nEnter new temporary password:`);
+  if(np){ alert(`Password for ${acc.username} reset to "${np}" (demo).`); }
+}
+
+/* Change price quick */
+function changePrice(id){
+  const acc = accounts.find(a=>a.id===id);
+  if(!acc) return;
+  const val = prompt(`Change monthly price for ${acc.company}`, acc.price);
+  if(val!==null){ acc.price = Number(val) || acc.price; alert(`Price updated to ₹${acc.price} (demo)`); renderTable(document.getElementById('search').value); }
+}
+
+/* suspend/reactivate */
+function toggleSuspend(id){
+  const acc = accounts.find(a=>a.id===id);
+  if(!acc) return;
+  acc.status = acc.status === 'active' ? 'suspended' : 'active';
+  alert(`${acc.company} is now ${acc.status} (demo)`);
+  renderTable(document.getElementById('search').value);
+}
+
+/* send reminder */
+function sendReminder(id){
+  const acc = accounts.find(a=>a.id===id);
+  if(!acc) return;
+  alert(`Reminder sent to ${acc.company} (${acc.email || acc.username}) — demo`);
+}
+
+/* delete */
+function deleteClient(id){
+  const acc = accounts.find(a=>a.id===id);
+  if(!acc) return;
+  if(!confirm(`Delete account "${acc.company}"? This cannot be undone in demo.`)) return;
+  accounts = accounts.filter(a=>a.id!==id);
+  alert('Deleted (demo)');
+  renderTable(document.getElementById('search').value);
+}
+
+/* dropdown toggles */
+function toggleDropdown(e,id){
+  e.stopPropagation();
+  document.querySelectorAll('.dropdown').forEach(d=>d.style.display='none');
+  const menu = document.getElementById(`menu-${id}`);
+  if(menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+window.addEventListener('click', ()=> document.querySelectorAll('.dropdown').forEach(d=>d.style.display='none'));
+
+/* bulk delete */
+document.getElementById('bulkDeleteBtn').addEventListener('click', ()=> {
+  const ids = Array.from(document.querySelectorAll('.rowSelect')).filter(cb=>cb.checked).map(cb=>Number(cb.dataset.id));
+  if(!ids.length) return alert('Select accounts first');
+  if(!confirm(`Delete ${ids.length} selected accounts?`)) return;
+  accounts = accounts.filter(a=> !ids.includes(a.id));
+  alert('Selected deleted (demo)');
+  renderTable(document.getElementById('search').value);
+});
+
+/* init */
+renderTable();
+
+/* accessibility: close modal with escape */
+document.addEventListener('keydown', (e)=> { if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
