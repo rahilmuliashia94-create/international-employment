@@ -7,23 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* frosted glass / premium cyber style */
+  /* primary theme (dark / cyber) */
   --bg:#02060a;
-  --panel:#071217;
   --muted:#96a6ac;
   --accent:#16c76b;
   --accent-2:#26e07f;
   --card:#0b1416;
-  --glass: rgba(255,255,255,0.03);
-  --radius:18px;
   --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  --modal-bg: rgba(20,24,26,0.6);
-  --modal-blur: 8px;
-  --neon-width: 3px;
-  --neon-color: rgba(38,230,127,0.95);
-  --button-gradient: linear-gradient(90deg,var(--accent),var(--accent-2));
 }
 
+/* base */
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#031018);font-family:var(--font);-webkit-font-smoothing:antialiased;color:#e6f7ef}
 .container{max-width:1280px;margin:18px auto;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.12));border:1px solid rgba(255,255,255,0.02)}
@@ -31,7 +24,7 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#0310
 /* layout */
 .app{display:flex;gap:12px}
 
-/* sidebar (kept from previous admin style) */
+/* sidebar */
 .sidebar{
   width:220px;
   background:linear-gradient(180deg, rgba(1,4,9,0.9), rgba(2,6,10,0.9));
@@ -45,7 +38,7 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#0310
 .brand{ color:var(--accent); font-weight:800; font-size:16px; display:flex; gap:8px; align-items:center;}
 .brand .logo-dot{ width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,var(--accent),var(--accent-2)); display:inline-flex; align-items:center; justify-content:center; color:#042114; font-weight:800; font-size:13px; }
 
-.searchbox{ background:var(--glass); border-radius:8px; padding:8px 10px; color:var(--muted); font-size:13px; }
+.searchbox{ background:rgba(255,255,255,0.03); border-radius:8px; padding:8px 10px; color:var(--muted); font-size:13px; }
 
 /* menu */
 .menu { margin-top:6px; display:flex; flex-direction:column; gap:6px; }
@@ -53,7 +46,7 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#0310
 .menu a{ display:flex; align-items:center; gap:8px; color:#cfe8d6; text-decoration:none; padding:8px; border-radius:8px; font-size:13px; }
 .menu a.active{ background: linear-gradient(90deg, rgba(34,197,94,0.12), rgba(34,197,94,0.04)); color:#fff; transform:translateX(3px); }
 
-/* main area */
+/* main */
 .main{flex:1;display:flex;flex-direction:column;gap:12px;padding:6px}
 .header{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .header h1{margin:0;font-size:18px;color:#eafcf0}
@@ -61,13 +54,13 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#0310
 
 /* controls */
 .btn{padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
-.btn-add{background:var(--button-gradient);color:#042114;box-shadow:0 10px 30px rgba(22,199,107,0.08)}
+.btn-add{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#042114;box-shadow:0 10px 30px rgba(22,199,107,0.08)}
 .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 
 /* card & table */
 .card{background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.search{background:var(--glass);padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);width:320px;color:var(--muted)}
+.search{background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);width:320px;color:var(--muted)}
 .table-wrap{overflow:auto;max-height:560px;border-radius:8px}
 .table{width:100%;border-collapse:collapse;font-size:13px;color:#e7f3f7}
 .table thead th{position:sticky;top:0;background:transparent;padding:12px;text-align:left;color:var(--muted);font-weight:600;border-bottom:1px solid rgba(255,255,255,0.03)}
@@ -80,109 +73,118 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#0310
 .pill-active{background:linear-gradient(90deg,#064e31,var(--accent));color:#eaffef}
 .pill-suspended{background:linear-gradient(90deg,#2f2f2f,#1f1f1f);color:#f3e6e6}
 
-/* 3-dot dropdown */
+/* dropdown */
 .dd{position:relative}
 .dotbtn{width:36px;height:36px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted)}
 .dropdown{position:absolute;right:0;top:46px;background:#0f1b1d;border-radius:8px;padding:8px;border:1px solid rgba(255,255,255,0.03);min-width:200px;z-index:80;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
 .dropdown button{display:block;width:100%;padding:8px;border-radius:8px;background:transparent;border:none;color:var(--muted);text-align:left;cursor:pointer}
 .dropdown button:hover{color:#eaffef;background:rgba(255,255,255,0.02)}
 
-/* ----------------------------
-   FROSTED MODAL + NEON ANIMATED BORDER
-   ---------------------------- */
-/* backdrop */
-.modal-backdrop{position:fixed;left:0;top:0;width:100%;height:100%;background:linear-gradient(180deg, rgba(1,2,3,0.55), rgba(1,2,3,0.6));display:none;align-items:center;justify-content:center;z-index:220;padding:28px;}
-.modal-backdrop.open{display:flex}
+/* ================================
+   FROSTED GLASS + INFINITE GREEN GLOW
+   (FULL replacement modal styles)
+   ================================ */
 
-/* container that holds neon border (uses before for animated stroke) */
-.modal-frame{
-  position:relative;
-  width:94%;
-  max-width:820px;
-  border-radius:20px;
-  padding:6px; /* space for neon stroke */
-  pointer-events:auto;
+.modal-backdrop{
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:400;
+  backdrop-filter: blur(6px);
 }
+.modal-backdrop.open{ display:flex; }
 
-/* animated neon edge: uses background gradient moving */
-.modal-frame::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:20px;
-  padding: var(--neon-width);
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  background: conic-gradient(from 0deg, rgba(38,230,127,0.95), rgba(56,220,165,0.8), rgba(38,230,127,0.95), rgba(56,220,165,0.8));
-  filter: blur(6px) saturate(130%);
-  animation: spin 6s linear infinite;
-  pointer-events:none;
-  opacity:0.95;
-}
-
-/* actual frosted modal card inside the neon frame */
+/* modal card itself (positioned relative so ::before / ::after work) */
 .modal-card{
   position:relative;
-  border-radius:14px;
+  width:94%;
+  max-width:780px;
+  padding:28px;
+  border-radius:18px;
   overflow:hidden;
-  background: linear-gradient(180deg, rgba(18,22,24,0.68), rgba(12,16,18,0.55));
-  border:1px solid rgba(255,255,255,0.04);
-  backdrop-filter: blur(var(--modal-blur));
-  -webkit-backdrop-filter: blur(var(--modal-blur));
-  padding:26px;
-  color:#e7f7ef;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  z-index:1;
+  background:rgba(12,16,18,0.55);             /* frosted dark base */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 40px rgba(22,199,107,0.10);
 }
 
-/* small decorative inner glow */
+/* animated neon-like border (outer glow) */
+.modal-card::before{
+  content:"";
+  position:absolute;
+  inset:-4px;               /* expand outside the card so glow shows */
+  border-radius:22px;
+  background:linear-gradient(
+    45deg,
+    #16c76b,
+    #3cf2a1,
+    #16c76b,
+    #0fd17c,
+    #16c76b
+  );
+  background-size:400% 400%;
+  animation: greenGlow 6s linear infinite;
+  z-index:-2;
+  filter: blur(10px);
+}
+
+/* inner overlay to deepen frosted effect */
 .modal-card::after{
   content:"";
   position:absolute;
-  left:0;right:0;bottom:0;height:6px;
-  background: linear-gradient(90deg, rgba(22,199,107,0.06), rgba(56,220,165,0.04));
-  pointer-events:none;
+  inset:4px;
+  border-radius:16px;
+  background:rgba(12,16,18,0.75);
+  backdrop-filter: blur(18px);
+  z-index:-1;
 }
 
-/* title */
-.modal-card h2{margin:0;color:var(--accent);font-weight:800;text-align:center;font-size:20px;letter-spacing:0.2px}
+@keyframes greenGlow{
+  0%{ background-position: 0% 50%; }
+  100%{ background-position: 400% 50%; }
+}
 
-/* form */
+/* modal content */
+.modal-card h2{
+  margin:0;
+  color:var(--accent);
+  font-weight:800;
+  text-align:center;
+  font-size:20px;
+}
+
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
 .form-row{display:flex;flex-direction:column;gap:8px}
-.input{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#eafaf0;font-size:14px;outline:none}
-.input::placeholder{color:#7f9a91}
-.select{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#eafaf0}
-.input[type="file"]{padding:10px}
-
-/* price input emphasis */
+.input{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:#eafaf0;font-size:14px}
+.input::placeholder{color:#8fa4a0}
+.select{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:#eafaf0}
 .price-row{display:flex;gap:8px;align-items:center}
-.price-input{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#eafaf0}
+.price-input{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:#eafaf0}
 
 /* buttons */
 .modal-actions{display:flex;gap:12px;justify-content:center;margin-top:18px}
-.btn-submit{background:var(--button-gradient);color:#042114;border-radius:12px;padding:14px 22px;font-weight:800;border:none;font-size:15px;cursor:pointer;box-shadow:0 8px 30px rgba(22,199,107,0.12)}
-.btn-cancel{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:12px;cursor:pointer;color:#e7f3f7}
+.btn-submit{background:linear-gradient(90deg,#16c76b,#32f29c);color:#042114;padding:14px 22px;border-radius:12px;font-weight:800;border:none;cursor:pointer;box-shadow:0 10px 40px rgba(22,199,107,0.25)}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 14px 50px rgba(22,199,107,0.35)}
+.btn-cancel{background:transparent;border:1px solid rgba(255,255,255,0.1);padding:12px 18px;border-radius:12px;cursor:pointer;color:#fff}
 
-/* view read rows */
-.read-row{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));margin-top:10px;color:#e7f3f7}
+/* read-only view rows */
+.read-row{padding:12px;border-radius:10px;background:rgba(255,255,255,0.04);margin-top:10px;color:#e7f3f7}
 
 /* small muted */
 .small-muted{ color:var(--muted); font-size:12px; }
-
-/* keyframe for neon movement */
-@keyframes spin{
-  from{ transform:rotate(0deg); }
-  to{ transform:rotate(360deg); }
-}
 
 /* responsive */
 @media (max-width:980px){
   .app{flex-direction:column}
   .form-grid{grid-template-columns:1fr}
-  .modal-frame{padding:4px}
 }
 </style>
 </head>
@@ -266,105 +268,103 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#0310
     </div>
   </div>
 
-  <!-- modal (frosted + neon) -->
+  <!-- MODAL: frosted glass + green glow -->
   <div id="modal" class="modal-backdrop" aria-hidden="true">
-    <div class="modal-frame" role="presentation">
-      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <h2 id="modalTitle">Add New Client</h2>
-          <div><button id="modalClose" class="btn btn-ghost">✕</button></div>
-        </div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2 id="modalTitle">Add New Client</h2>
+        <div><button id="modalClose" class="btn btn-ghost">✕</button></div>
+      </div>
 
-        <!-- form (Add / Edit) -->
-        <form id="clientForm" style="margin-top:12px">
-          <div class="form-grid">
-            <div>
-              <div class="form-row">
-                <label class="small-muted">Company name</label>
-                <input id="f_company" class="input" placeholder="Full company name" required>
-              </div>
-
-              <div class="form-row">
-                <label class="small-muted">Username</label>
-                <input id="f_username" class="input" placeholder="username_for_company" required>
-              </div>
-
-              <div class="form-row">
-                <label class="small-muted">Email (optional)</label>
-                <input id="f_email" class="input" placeholder="email@company.com">
-              </div>
-
-              <div class="form-row">
-                <label class="small-muted">Password (optional)</label>
-                <input id="f_password" class="input" type="password" placeholder="temporary password (optional)">
-              </div>
-
-              <div class="form-row">
-                <label class="small-muted">Phone (optional)</label>
-                <input id="f_phone" class="input" placeholder="+91 8000 123456">
-              </div>
-
-              <div class="form-row">
-                <label class="small-muted">Address</label>
-                <input id="f_address" class="input" placeholder="Full address">
-              </div>
+      <!-- form (Add / Edit) -->
+      <form id="clientForm" style="margin-top:12px">
+        <div class="form-grid">
+          <div>
+            <div class="form-row">
+              <label class="small-muted">Company name</label>
+              <input id="f_company" class="input" placeholder="Full company name" required>
             </div>
 
-            <div>
-              <!-- price replaces plan -->
-              <div class="form-row">
-                <label class="small-muted">Price (monthly) — ₹</label>
-                <div class="price-row">
-                  <input id="f_price" class="price-input" placeholder="e.g. 2000" inputmode="numeric" pattern="[0-9]*">
-                </div>
-              </div>
+            <div class="form-row">
+              <label class="small-muted">Username</label>
+              <input id="f_username" class="input" placeholder="username_for_company" required>
+            </div>
 
-              <div class="form-row">
-                <label class="small-muted">Auto renew</label>
-                <select id="f_autorenew" class="select"><option>ON</option><option>OFF</option></select>
-              </div>
+            <div class="form-row">
+              <label class="small-muted">Email (optional)</label>
+              <input id="f_email" class="input" placeholder="email@company.com">
+            </div>
 
-              <div class="form-row">
-                <label class="small-muted">Status</label>
-                <select id="f_status" class="select"><option value="active">Active</option><option value="suspended">Suspended</option></select>
-              </div>
+            <div class="form-row">
+              <label class="small-muted">Password (optional)</label>
+              <input id="f_password" class="input" type="password" placeholder="temporary password (optional)">
+            </div>
 
-              <div class="form-row">
-                <label class="small-muted">Upload logo (optional)</label>
-                <input id="f_logo" type="file" accept="image/*" class="input">
-              </div>
+            <div class="form-row">
+              <label class="small-muted">Phone (optional)</label>
+              <input id="f_phone" class="input" placeholder="+91 8000 123456">
+            </div>
 
-              <div class="form-row" style="margin-top:8px;">
-                <label class="small-muted">Notes (optional)</label>
-                <input id="f_notes" class="input" placeholder="Short note or identifier">
-              </div>
+            <div class="form-row">
+              <label class="small-muted">Address</label>
+              <input id="f_address" class="input" placeholder="Full address">
             </div>
           </div>
 
-          <div class="modal-actions">
-            <button type="button" id="saveClientBtn" class="btn-submit">Submit</button>
-            <button type="button" id="cancelClientBtn" class="btn-cancel">Cancel</button>
-          </div>
-        </form>
+          <div>
+            <!-- price replaces plan -->
+            <div class="form-row">
+              <label class="small-muted">Price (monthly) — ₹</label>
+              <div class="price-row">
+                <input id="f_price" class="price-input" placeholder="e.g. 2000" inputmode="numeric" pattern="[0-9]*">
+              </div>
+            </div>
 
-        <!-- view-only (dark frosted rows) -->
-        <div id="viewArea" style="display:none;margin-top:14px">
-          <div class="read-row"><strong id="v_company">Company</strong></div>
-          <div class="read-row" id="v_user">Username</div>
-          <div class="read-row" id="v_email">Email</div>
-          <div class="read-row">Price: <strong id="v_price">₹0</strong></div>
-          <div class="read-row">Auto renew: <span id="v_autorenew"></span></div>
-          <div class="read-row">Status: <span id="v_status"></span></div>
-          <div class="read-row">Phone: <span id="v_phone"></span></div>
-          <div class="read-row" id="v_address">Address</div>
-          <div class="read-row" id="v_notes">Notes</div>
+            <div class="form-row">
+              <label class="small-muted">Auto renew</label>
+              <select id="f_autorenew" class="select"><option>ON</option><option>OFF</option></select>
+            </div>
+
+            <div class="form-row">
+              <label class="small-muted">Status</label>
+              <select id="f_status" class="select"><option value="active">Active</option><option value="suspended">Suspended</option></select>
+            </div>
+
+            <div class="form-row">
+              <label class="small-muted">Upload logo (optional)</label>
+              <input id="f_logo" type="file" accept="image/*" class="input">
+            </div>
+
+            <div class="form-row" style="margin-top:8px;">
+              <label class="small-muted">Notes (optional)</label>
+              <input id="f_notes" class="input" placeholder="Short note or identifier">
+            </div>
+          </div>
         </div>
+
+        <div class="modal-actions">
+          <button type="button" id="saveClientBtn" class="btn-submit">Submit</button>
+          <button type="button" id="cancelClientBtn" class="btn-cancel">Cancel</button>
+        </div>
+      </form>
+
+      <!-- view-only -->
+      <div id="viewArea" style="display:none;margin-top:14px">
+        <div class="read-row"><strong id="v_company">Company</strong></div>
+        <div class="read-row" id="v_user">Username</div>
+        <div class="read-row" id="v_email">Email</div>
+        <div class="read-row">Price: <strong id="v_price">₹0</strong></div>
+        <div class="read-row">Auto renew: <span id="v_autorenew"></span></div>
+        <div class="read-row">Status: <span id="v_status"></span></div>
+        <div class="read-row">Phone: <span id="v_phone"></span></div>
+        <div class="read-row" id="v_address">Address</div>
+        <div class="read-row" id="v_notes">Notes</div>
       </div>
     </div>
   </div>
 
 <script>
-/* Demo accounts (price field used, plan removed) */
+/* Demo accounts (price used instead of plan) */
 let accounts = [
   {id:1,company:"Reliance Retail - Rajkot",username:"reliance_admin",email:"reliance@rajkot.com",price:2000,next:"2026-07-15",status:"active",autorenew:"ON",address:"MG Road, Rajkot",phone:"+91 8000123456",logo:null,notes:"Main retail"},
   {id:2,company:"HDFC Bank ATM",username:"hdfc_admin",email:"hdfc@rajkot.com",price:2000,next:"2026-07-15",status:"active",autorenew:"ON",address:"Sector 5, Rajkot",phone:"",logo:null,notes:"ATM site"},
@@ -554,7 +554,6 @@ function editClient(id){
     acc.autorenew = document.getElementById('f_autorenew').value;
     acc.status = document.getElementById('f_status').value;
     acc.notes = document.getElementById('f_notes').value.trim() || acc.notes;
-    // If a logo file is chosen during edit, read it
     const fileInput = document.getElementById('f_logo');
     if(fileInput.files && fileInput.files[0]){
       const fr = new FileReader();
